@@ -9,9 +9,6 @@ import Matches from "./pages/matches/Index";
 import Tickets from "./pages/tickets/Index";
 import League from "./pages/league/Index";
 
-
-
-
 const queryClient = new QueryClient();
 
 const App = () => (

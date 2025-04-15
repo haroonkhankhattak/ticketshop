@@ -1,0 +1,780 @@
+
+/Users/shijomon/Documents/Haroon/ticketshop/ticketverse-replica-main
+├── node_modules
+|  ├── @alloc
+|  |  └── quick-lru
+|  ├── @babel
+|  |  ├── helper-string-parser
+|  |  ├── helper-validator-identifier
+|  |  ├── parser
+|  |  ├── runtime
+|  |  └── types
+|  ├── @esbuild
+|  |  └── darwin-arm64
+|  ├── @eslint
+|  |  ├── config-array
+|  |  ├── config-helpers
+|  |  ├── core
+|  |  ├── eslintrc
+|  |  ├── js
+|  |  ├── object-schema
+|  |  └── plugin-kit
+|  ├── @eslint-community
+|  |  ├── eslint-utils
+|  |  └── regexpp
+|  ├── @floating-ui
+|  |  ├── core
+|  |  ├── dom
+|  |  ├── react-dom
+|  |  └── utils
+|  ├── @fontsource
+|  |  └── dosis
+|  ├── @hookform
+|  |  └── resolvers
+|  ├── @humanfs
+|  |  ├── core
+|  |  └── node
+|  ├── @humanwhocodes
+|  |  ├── module-importer
+|  |  └── retry
+|  ├── @img
+|  |  ├── sharp-darwin-arm64
+|  |  └── sharp-libvips-darwin-arm64
+|  ├── @isaacs
+|  |  └── cliui
+|  ├── @jridgewell
+|  |  ├── gen-mapping
+|  |  ├── resolve-uri
+|  |  ├── set-array
+|  |  ├── sourcemap-codec
+|  |  └── trace-mapping
+|  ├── @next
+|  |  ├── env
+|  |  ├── font
+|  |  └── swc-darwin-arm64
+|  ├── @nodelib
+|  |  ├── fs.scandir
+|  |  ├── fs.stat
+|  |  └── fs.walk
+|  ├── @pkgjs
+|  |  └── parseargs
+|  ├── @radix-ui
+|  |  ├── number
+|  |  ├── primitive
+|  |  ├── react-accordion
+|  |  ├── react-alert-dialog
+|  |  ├── react-arrow
+|  |  ├── react-aspect-ratio
+|  |  ├── react-avatar
+|  |  ├── react-checkbox
+|  |  ├── react-collapsible
+|  |  ├── react-collection
+|  |  ├── react-compose-refs
+|  |  ├── react-context
+|  |  ├── react-context-menu
+|  |  ├── react-dialog
+|  |  ├── react-direction
+|  |  ├── react-dismissable-layer
+|  |  ├── react-dropdown-menu
+|  |  ├── react-focus-guards
+|  |  ├── react-focus-scope
+|  |  ├── react-hover-card
+|  |  ├── react-id
+|  |  ├── react-label
+|  |  ├── react-menu
+|  |  ├── react-menubar
+|  |  ├── react-navigation-menu
+|  |  ├── react-popover
+|  |  ├── react-popper
+|  |  ├── react-portal
+|  |  ├── react-presence
+|  |  ├── react-primitive
+|  |  ├── react-progress
+|  |  ├── react-radio-group
+|  |  ├── react-roving-focus
+|  |  ├── react-scroll-area
+|  |  ├── react-select
+|  |  ├── react-separator
+|  |  ├── react-slider
+|  |  ├── react-slot
+|  |  ├── react-switch
+|  |  ├── react-tabs
+|  |  ├── react-toast
+|  |  ├── react-toggle
+|  |  ├── react-toggle-group
+|  |  ├── react-tooltip
+|  |  ├── react-use-callback-ref
+|  |  ├── react-use-controllable-state
+|  |  ├── react-use-escape-keydown
+|  |  ├── react-use-layout-effect
+|  |  ├── react-use-previous
+|  |  ├── react-use-rect
+|  |  ├── react-use-size
+|  |  ├── react-visually-hidden
+|  |  └── rect
+|  ├── @remix-run
+|  |  └── router
+|  ├── @rollup
+|  |  └── rollup-darwin-arm64
+|  ├── @swc
+|  |  ├── core
+|  |  ├── core-darwin-arm64
+|  |  ├── counter
+|  |  ├── helpers
+|  |  └── types
+|  ├── @tailwindcss
+|  |  └── typography
+|  ├── @tanstack
+|  |  ├── query-core
+|  |  └── react-query
+|  ├── @types
+|  |  ├── d3-array
+|  |  ├── d3-color
+|  |  ├── d3-ease
+|  |  ├── d3-interpolate
+|  |  ├── d3-path
+|  |  ├── d3-scale
+|  |  ├── d3-shape
+|  |  ├── d3-time
+|  |  ├── d3-timer
+|  |  ├── estree
+|  |  ├── json-schema
+|  |  ├── node
+|  |  ├── prop-types
+|  |  ├── react
+|  |  └── react-dom
+|  ├── @typescript-eslint
+|  |  ├── eslint-plugin
+|  |  ├── parser
+|  |  ├── scope-manager
+|  |  ├── type-utils
+|  |  ├── types
+|  |  ├── typescript-estree
+|  |  ├── utils
+|  |  └── visitor-keys
+|  ├── @vitejs
+|  |  └── plugin-react-swc
+|  ├── acorn
+|  |  ├── bin
+|  |  └── dist
+|  ├── acorn-jsx
+|  |  └── node_modules
+|  ├── ajv
+|  |  ├── dist
+|  |  ├── lib
+|  |  └── scripts
+|  ├── ansi-regex
+|  ├── ansi-styles
+|  ├── any-promise
+|  |  └── register
+|  ├── anymatch
+|  ├── arg
+|  ├── argparse
+|  |  └── lib
+|  ├── aria-hidden
+|  |  └── dist
+|  ├── autoprefixer
+|  |  ├── bin
+|  |  ├── data
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── balanced-match
+|  ├── binary-extensions
+|  ├── brace-expansion
+|  ├── braces
+|  |  └── lib
+|  ├── browserslist
+|  |  └── node_modules
+|  ├── busboy
+|  |  ├── bench
+|  |  ├── lib
+|  |  └── test
+|  ├── callsites
+|  ├── camelcase-css
+|  ├── caniuse-lite
+|  |  ├── data
+|  |  └── dist
+|  ├── chalk
+|  |  └── source
+|  ├── chokidar
+|  |  ├── lib
+|  |  └── types
+|  ├── class-variance-authority
+|  |  └── dist
+|  ├── client-only
+|  ├── clsx
+|  |  └── dist
+|  ├── cmdk
+|  |  └── dist
+|  ├── color
+|  ├── color-convert
+|  ├── color-name
+|  ├── color-string
+|  ├── commander
+|  |  └── typings
+|  ├── concat-map
+|  |  ├── example
+|  |  └── test
+|  ├── cross-spawn
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── cssesc
+|  |  ├── bin
+|  |  └── man
+|  ├── csstype
+|  ├── d3-array
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-color
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-ease
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-format
+|  |  ├── dist
+|  |  ├── locale
+|  |  └── src
+|  ├── d3-interpolate
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-path
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-scale
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-shape
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-time
+|  |  ├── dist
+|  |  └── src
+|  ├── d3-time-format
+|  |  ├── dist
+|  |  ├── locale
+|  |  └── src
+|  ├── d3-timer
+|  |  ├── dist
+|  |  └── src
+|  ├── date-fns
+|  |  ├── _lib
+|  |  ├── docs
+|  |  ├── fp
+|  |  ├── locale
+|  |  └── parse
+|  ├── debug
+|  |  └── src
+|  ├── decimal.js-light
+|  |  └── doc
+|  ├── deep-is
+|  |  ├── example
+|  |  └── test
+|  ├── detect-libc
+|  |  └── lib
+|  ├── detect-node-es
+|  |  ├── es5
+|  |  └── esm
+|  ├── didyoumean
+|  ├── dlv
+|  |  └── dist
+|  ├── dom-helpers
+|  |  ├── activeElement
+|  |  ├── addClass
+|  |  ├── addEventListener
+|  |  ├── animate
+|  |  ├── animationFrame
+|  |  ├── attribute
+|  |  ├── camelize
+|  |  ├── camelizeStyle
+|  |  ├── canUseDOM
+|  |  ├── childElements
+|  |  ├── childNodes
+|  |  ├── cjs
+|  |  ├── clear
+|  |  ├── closest
+|  |  ├── collectElements
+|  |  ├── collectSiblings
+|  |  ├── contains
+|  |  ├── css
+|  |  ├── esm
+|  |  ├── filterEventHandler
+|  |  ├── getComputedStyle
+|  |  ├── getScrollAccessor
+|  |  ├── hasClass
+|  |  ├── height
+|  |  ├── hyphenate
+|  |  ├── hyphenateStyle
+|  |  ├── insertAfter
+|  |  ├── isDocument
+|  |  ├── isInput
+|  |  ├── isTransform
+|  |  ├── isVisible
+|  |  ├── isWindow
+|  |  ├── listen
+|  |  ├── matches
+|  |  ├── nextUntil
+|  |  ├── offset
+|  |  ├── offsetParent
+|  |  ├── ownerDocument
+|  |  ├── ownerWindow
+|  |  ├── parents
+|  |  ├── position
+|  |  ├── prepend
+|  |  ├── querySelectorAll
+|  |  ├── remove
+|  |  ├── removeClass
+|  |  ├── removeEventListener
+|  |  ├── scrollLeft
+|  |  ├── scrollParent
+|  |  ├── scrollTo
+|  |  ├── scrollTop
+|  |  ├── scrollbarSize
+|  |  ├── siblings
+|  |  ├── text
+|  |  ├── toggleClass
+|  |  ├── transitionEnd
+|  |  ├── triggerEvent
+|  |  └── width
+|  ├── eastasianwidth
+|  ├── electron-to-chromium
+|  ├── embla-carousel
+|  |  ├── cjs
+|  |  ├── components
+|  |  └── esm
+|  ├── embla-carousel-react
+|  |  ├── cjs
+|  |  ├── components
+|  |  └── esm
+|  ├── embla-carousel-reactive-utils
+|  |  ├── cjs
+|  |  ├── components
+|  |  └── esm
+|  ├── emoji-regex
+|  |  └── es2015
+|  ├── esbuild
+|  |  ├── bin
+|  |  └── lib
+|  ├── escalade
+|  |  ├── dist
+|  |  └── sync
+|  ├── escape-string-regexp
+|  ├── eslint
+|  |  ├── bin
+|  |  ├── conf
+|  |  ├── lib
+|  |  ├── messages
+|  |  └── node_modules
+|  ├── eslint-plugin-react-hooks
+|  |  ├── cjs
+|  |  └── node_modules
+|  ├── eslint-plugin-react-refresh
+|  |  └── node_modules
+|  ├── eslint-scope
+|  |  ├── dist
+|  |  └── lib
+|  ├── eslint-visitor-keys
+|  |  ├── dist
+|  |  └── lib
+|  ├── espree
+|  |  ├── dist
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── esquery
+|  |  └── dist
+|  ├── esrecurse
+|  ├── estraverse
+|  ├── estree-walker
+|  |  ├── src
+|  |  └── types
+|  ├── esutils
+|  |  └── lib
+|  ├── eventemitter3
+|  |  └── umd
+|  ├── fast-deep-equal
+|  |  └── es6
+|  ├── fast-equals
+|  |  ├── config
+|  |  ├── dist
+|  |  ├── recipes
+|  |  ├── scripts
+|  |  └── src
+|  ├── fast-glob
+|  |  └── out
+|  ├── fast-json-stable-stringify
+|  |  ├── benchmark
+|  |  ├── example
+|  |  └── test
+|  ├── fast-levenshtein
+|  ├── fastq
+|  |  └── test
+|  ├── file-entry-cache
+|  ├── fill-range
+|  ├── find-up
+|  ├── flat-cache
+|  |  └── src
+|  ├── flatted
+|  |  ├── cjs
+|  |  ├── esm
+|  |  ├── php
+|  |  ├── python
+|  |  └── types
+|  ├── foreground-child
+|  |  └── dist
+|  ├── fraction.js
+|  ├── fsevents
+|  ├── function-bind
+|  |  └── test
+|  ├── get-nonce
+|  |  └── dist
+|  ├── glob
+|  |  ├── dist
+|  |  └── node_modules
+|  ├── glob-parent
+|  ├── globals
+|  ├── graphemer
+|  |  └── lib
+|  ├── has-flag
+|  ├── hasown
+|  ├── ignore
+|  ├── import-fresh
+|  ├── imurmurhash
+|  ├── input-otp
+|  |  └── dist
+|  ├── internmap
+|  |  ├── dist
+|  |  └── src
+|  ├── is-arrayish
+|  ├── is-binary-path
+|  ├── is-core-module
+|  |  └── test
+|  ├── is-extglob
+|  ├── is-fullwidth-code-point
+|  ├── is-glob
+|  ├── is-number
+|  ├── isexe
+|  |  └── test
+|  ├── jackspeak
+|  |  └── dist
+|  ├── jiti
+|  |  ├── bin
+|  |  ├── dist
+|  |  └── lib
+|  ├── js-tokens
+|  ├── js-yaml
+|  |  ├── bin
+|  |  ├── dist
+|  |  └── lib
+|  ├── json-buffer
+|  |  └── test
+|  ├── json-schema-traverse
+|  |  └── spec
+|  ├── json-stable-stringify-without-jsonify
+|  |  ├── example
+|  |  └── test
+|  ├── keyv
+|  |  └── src
+|  ├── levn
+|  |  └── lib
+|  ├── lilconfig
+|  |  └── src
+|  ├── lines-and-columns
+|  |  └── build
+|  ├── locate-path
+|  ├── lodash
+|  |  └── fp
+|  ├── lodash.castarray
+|  ├── lodash.isplainobject
+|  ├── lodash.merge
+|  ├── loose-envify
+|  ├── lovable-tagger
+|  |  ├── dist
+|  |  └── node_modules
+|  ├── lru-cache
+|  |  └── dist
+|  ├── lucide-react
+|  |  └── dist
+|  ├── magic-string
+|  |  └── dist
+|  ├── merge2
+|  ├── micromatch
+|  ├── minimatch
+|  ├── minipass
+|  |  └── dist
+|  ├── ms
+|  ├── mz
+|  ├── nanoid
+|  |  ├── async
+|  |  ├── bin
+|  |  ├── non-secure
+|  |  └── url-alphabet
+|  ├── natural-compare
+|  ├── next
+|  |  ├── compat
+|  |  ├── dist
+|  |  ├── experimental
+|  |  ├── font
+|  |  ├── image-types
+|  |  ├── legacy
+|  |  ├── navigation-types
+|  |  ├── node_modules
+|  |  └── types
+|  ├── next-themes
+|  |  └── dist
+|  ├── node-releases
+|  |  └── data
+|  ├── normalize-path
+|  ├── normalize-range
+|  ├── object-assign
+|  ├── object-hash
+|  |  └── dist
+|  ├── optionator
+|  |  └── lib
+|  ├── p-limit
+|  ├── p-locate
+|  ├── package-json-from-dist
+|  |  └── dist
+|  ├── parent-module
+|  ├── path-exists
+|  ├── path-key
+|  ├── path-parse
+|  ├── path-scurry
+|  |  └── dist
+|  ├── picocolors
+|  ├── picomatch
+|  |  └── lib
+|  ├── pify
+|  ├── pirates
+|  |  └── lib
+|  ├── postcss
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── postcss-import
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── postcss-js
+|  ├── postcss-load-config
+|  |  ├── node_modules
+|  |  └── src
+|  ├── postcss-nested
+|  ├── postcss-selector-parser
+|  |  ├── dist
+|  |  └── node_modules
+|  ├── postcss-value-parser
+|  |  └── lib
+|  ├── prelude-ls
+|  |  └── lib
+|  ├── prop-types
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── punycode
+|  ├── queue-microtask
+|  ├── react
+|  |  ├── cjs
+|  |  ├── node_modules
+|  |  └── umd
+|  ├── react-day-picker
+|  |  ├── dist
+|  |  └── src
+|  ├── react-dom
+|  |  ├── cjs
+|  |  ├── node_modules
+|  |  └── umd
+|  ├── react-hook-form
+|  |  └── dist
+|  ├── react-is
+|  |  ├── cjs
+|  |  └── umd
+|  ├── react-remove-scroll
+|  |  ├── UI
+|  |  ├── dist
+|  |  └── sidecar
+|  ├── react-remove-scroll-bar
+|  |  ├── constants
+|  |  └── dist
+|  ├── react-resizable-panels
+|  |  └── dist
+|  ├── react-router
+|  |  └── dist
+|  ├── react-router-dom
+|  |  └── dist
+|  ├── react-smooth
+|  |  ├── es6
+|  |  ├── lib
+|  |  ├── src
+|  |  └── umd
+|  ├── react-style-singleton
+|  |  └── dist
+|  ├── react-transition-group
+|  |  ├── CSSTransition
+|  |  ├── ReplaceTransition
+|  |  ├── SwitchTransition
+|  |  ├── Transition
+|  |  ├── TransitionGroup
+|  |  ├── TransitionGroupContext
+|  |  ├── cjs
+|  |  ├── config
+|  |  ├── dist
+|  |  ├── esm
+|  |  └── node_modules
+|  ├── read-cache
+|  ├── readdirp
+|  ├── recharts
+|  |  ├── es6
+|  |  ├── lib
+|  |  ├── types
+|  |  └── umd
+|  ├── recharts-scale
+|  |  ├── es6
+|  |  ├── lib
+|  |  ├── src
+|  |  └── umd
+|  ├── regenerator-runtime
+|  ├── resolve
+|  |  ├── bin
+|  |  ├── example
+|  |  ├── lib
+|  |  └── test
+|  ├── resolve-from
+|  ├── reusify
+|  |  └── benchmarks
+|  ├── rollup
+|  |  └── dist
+|  ├── run-parallel
+|  ├── scheduler
+|  |  ├── cjs
+|  |  ├── node_modules
+|  |  └── umd
+|  ├── semver
+|  |  ├── bin
+|  |  ├── classes
+|  |  ├── functions
+|  |  ├── internal
+|  |  └── ranges
+|  ├── sharp
+|  |  ├── install
+|  |  ├── lib
+|  |  ├── node_modules
+|  |  └── src
+|  ├── shebang-command
+|  ├── shebang-regex
+|  ├── signal-exit
+|  |  └── dist
+|  ├── simple-swizzle
+|  ├── sonner
+|  |  └── dist
+|  ├── source-map-js
+|  |  └── lib
+|  ├── streamsearch
+|  |  ├── lib
+|  |  └── test
+|  ├── string-width
+|  |  └── node_modules
+|  ├── string-width-cjs
+|  ├── strip-ansi
+|  ├── strip-ansi-cjs
+|  ├── strip-json-comments
+|  ├── styled-jsx
+|  |  ├── dist
+|  |  └── lib
+|  ├── sucrase
+|  |  ├── bin
+|  |  ├── dist
+|  |  ├── node_modules
+|  |  ├── register
+|  |  └── ts-node-plugin
+|  ├── supports-color
+|  ├── supports-preserve-symlinks-flag
+|  |  └── test
+|  ├── tailwind-merge
+|  |  ├── dist
+|  |  └── src
+|  ├── tailwindcss
+|  |  ├── lib
+|  |  ├── nesting
+|  |  ├── node_modules
+|  |  ├── peers
+|  |  ├── scripts
+|  |  ├── src
+|  |  ├── stubs
+|  |  └── types
+|  ├── tailwindcss-animate
+|  |  └── node_modules
+|  ├── thenify
+|  ├── thenify-all
+|  ├── tiny-invariant
+|  |  ├── dist
+|  |  └── src
+|  ├── to-regex-range
+|  ├── ts-api-utils
+|  |  ├── lib
+|  |  └── node_modules
+|  ├── ts-interface-checker
+|  |  └── dist
+|  ├── tslib
+|  |  └── modules
+|  ├── type-check
+|  |  └── lib
+|  ├── typescript
+|  |  ├── bin
+|  |  └── lib
+|  ├── typescript-eslint
+|  |  ├── dist
+|  |  └── node_modules
+|  ├── undici-types
+|  ├── update-browserslist-db
+|  |  └── node_modules
+|  ├── uri-js
+|  |  └── dist
+|  ├── use-callback-ref
+|  |  └── dist
+|  ├── use-sidecar
+|  |  └── dist
+|  ├── util-deprecate
+|  ├── vaul
+|  |  └── dist
+|  ├── victory-vendor
+|  |  ├── es
+|  |  ├── lib
+|  |  └── lib-vendor
+|  ├── vite
+|  |  ├── bin
+|  |  ├── dist
+|  |  ├── node_modules
+|  |  └── types
+|  ├── which
+|  |  └── bin
+|  ├── word-wrap
+|  ├── wrap-ansi
+|  |  └── node_modules
+|  ├── wrap-ansi-cjs
+|  |  └── node_modules
+|  ├── yaml
+|  |  ├── browser
+|  |  └── dist
+|  ├── yocto-queue
+|  └── zod
+|     └── lib
+├── public
+|  └── uploads
+|     ├── leaguefans
+|     └── teamfans
+└── src
+   ├── components
+   |  ├── club
+   |  ├── layout
+   |  ├── league
+   |  ├── match
+   |  └── ui
+   ├── hooks
+   ├── lib
+   └── pages
+      ├── league
+      ├── matches
+      └── tickets
+
+directory: 772
+
+
+
+[2K[1G

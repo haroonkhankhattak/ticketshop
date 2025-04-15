@@ -55,9 +55,10 @@ export default {
         ticket: {
           red: "#e4032f",
           blue: "#00205b",
-          gray: "#f8f8f8",
+          gray: "#B0B1B1",
           darkgray: "#444444",
           lightgray: "#e1e1e1",
+          primarycolor: "#5c5c99",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

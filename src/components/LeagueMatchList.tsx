@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Clock } from "lucide-react";
 import LeagueCard from "./LeagueCard";
 import { useSearchParams } from "react-router-dom";
+import FilterButton from "@/components/FilterButton";
 
 interface MatchProps {
   id: number;
@@ -30,15 +31,20 @@ interface LeagueSectionProps {
 const LeagueSection: React.FC<LeagueSectionProps> = ({ title, teams }) => {
   return (
     <div className="mb-16">
-      <h2 className="font-dosis text-ltg-black text-lg font-medium capitalize pb-3">{title}</h2>
+      <h2 className="font-dosis text-ltg-black text-lg font-medium capitalize pb-3">
+        {title}
+      </h2>
       <ul className="text-sm">
         {teams.map((team, index) => (
-          <li key={index} className="border-ltg-grey-4 border-t py-2 last:border-b">
-            <a href={team.link} className="flex hover:underline">{team.name}</a>
+          <li
+            key={index}
+            className="border-ltg-grey-4 border-t py-2 last:border-b">
+            <a href={team.link} className="flex hover:underline">
+              {team.name}
+            </a>
           </li>
         ))}
       </ul>
-
     </div>
   );
 };
@@ -49,30 +55,73 @@ const leagues = [
     viewAllLink: "/english-premiership-tickets.html",
     teams: [
       { name: "Arsenal", link: "/matches?team=Arsenal&league=Premier League" },
-      { name: "Aston Villa", link: "/matches?team=Aston Villa&league=Premier League" },
-      { name: "Bournemouth", link: "/matches?team=Bournemouth&league=Premier League" },
-      { name: "Brentford", link: "/matches?team=Brentford&league=Premier League" },
-      { name: "Brighton", link: "/matches?team=Brighton&league=Premier League" },
+      {
+        name: "Aston Villa",
+        link: "/matches?team=Aston Villa&league=Premier League",
+      },
+      {
+        name: "Bournemouth",
+        link: "/matches?team=Bournemouth&league=Premier League",
+      },
+      {
+        name: "Brentford",
+        link: "/matches?team=Brentford&league=Premier League",
+      },
+      {
+        name: "Brighton",
+        link: "/matches?team=Brighton&league=Premier League",
+      },
       { name: "Burnley", link: "/matches?team=Burnley&league=Premier League" },
       { name: "Chelsea", link: "/matches?team=Chelsea&league=Premier League" },
-      { name: "Crystal Palace", link: "/matches?team=Crystal Palace&league=Premier League" },
+      {
+        name: "Crystal Palace",
+        link: "/matches?team=Crystal Palace&league=Premier League",
+      },
       { name: "Everton", link: "/matches?team=Everton&league=Premier League" },
       { name: "Fulham", link: "/matches?team=Fulham&league=Premier League" },
-      { name: "Liverpool", link: "/matches?team=Liverpool&league=Premier League" },
-      { name: "Luton Town", link: "/matches?team=Luton Town&league=Premier League" },
-      { name: "Manchester City", link: "/matches?team=Manchester City&league=Premier League" },
-      { name: "Manchester United", link: "/matches?team=Manchester United&league=Premier League" },
-      { name: "Newcastle United", link: "/matches?team=Newcastle United&league=Premier League" },
-      { name: "Nottingham Forest", link: "/matches?team=Nottingham Forest&league=Premier League" },
-      { name: "Sheffield United", link: "/matches?team=Sheffield United&league=Premier League" },
-      { name: "Tottenham Hotspur", link: "/matches?team=Tottenham Hotspur&league=Premier League" },
-      { name: "West Ham United", link: "/matches?team=West Ham United&league=Premier League" },
-      { name: "Wolverhampton Wanderers", link: "/matches?team=Wolverhampton Wanderers&league=Premier League" }
-    ]
-  }
-
+      {
+        name: "Liverpool",
+        link: "/matches?team=Liverpool&league=Premier League",
+      },
+      {
+        name: "Luton Town",
+        link: "/matches?team=Luton Town&league=Premier League",
+      },
+      {
+        name: "Manchester City",
+        link: "/matches?team=Manchester City&league=Premier League",
+      },
+      {
+        name: "Manchester United",
+        link: "/matches?team=Manchester United&league=Premier League",
+      },
+      {
+        name: "Newcastle United",
+        link: "/matches?team=Newcastle United&league=Premier League",
+      },
+      {
+        name: "Nottingham Forest",
+        link: "/matches?team=Nottingham Forest&league=Premier League",
+      },
+      {
+        name: "Sheffield United",
+        link: "/matches?team=Sheffield United&league=Premier League",
+      },
+      {
+        name: "Tottenham Hotspur",
+        link: "/matches?team=Tottenham Hotspur&league=Premier League",
+      },
+      {
+        name: "West Ham United",
+        link: "/matches?team=West Ham United&league=Premier League",
+      },
+      {
+        name: "Wolverhampton Wanderers",
+        link: "/matches?team=Wolverhampton Wanderers&league=Premier League",
+      },
+    ],
+  },
 ];
-
 
 const MatchRow: React.FC<MatchProps> = ({
   id,
@@ -84,7 +133,7 @@ const MatchRow: React.FC<MatchProps> = ({
   time,
   venue,
   country,
-  priceRange
+  priceRange,
 }) => {
   return (
     <div className="grid grid-cols-12 items-center border-b border-gray-200 group hover:bg-gray-100 cursor-pointer transition">
@@ -100,8 +149,10 @@ const MatchRow: React.FC<MatchProps> = ({
         <div className="text-xs text-gray-500 uppercase mb-1 group-hover:text-black transition">
           {competition}
         </div>
-        <div className="text-lg font-medium mb-1 group-hover:text-ticket-red transition">{teams}</div>
-        <div className="flex items-center font-light text-sm text-gray-600 group-hover:text-gray-800 transition">
+        <div className="text-lg font-medium mb-1 group-hover:text-ticket-red transition">
+          {teams}
+        </div>
+        <div className="flex items-center font-light text-sm  text-gray-600 group-hover:text-gray-800 transition">
           <Clock size={14} className="mr-1" />
           {time}
           <span className="mx-2">•</span>
@@ -113,15 +164,12 @@ const MatchRow: React.FC<MatchProps> = ({
       <div className="col-span-3 px-0 text-center">
         <Link
           to={`/match/${id}`}
-          className="btn-primary inline-block text-sm px-8 group-hover:bg-green-700 transition rounded-full"
-        >
+          className="btn-primary inline-block text-sm px-8 bg-black group-hover:bg-ticket-red transition rounded-full">
           View Tickets
         </Link>
         <span className="inline-block text-sm">From £{priceRange}</span>
       </div>
-
     </div>
-
   );
 };
 
@@ -140,7 +188,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "230"
+      priceRange: "230",
     },
     {
       id: 2,
@@ -152,7 +200,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "150"
+      priceRange: "150",
     },
     {
       id: 3,
@@ -164,7 +212,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "110"
+      priceRange: "110",
     },
     {
       id: 4,
@@ -176,7 +224,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "320"
+      priceRange: "320",
     },
     {
       id: 5,
@@ -188,7 +236,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "250"
+      priceRange: "250",
     },
     {
       id: 1,
@@ -200,7 +248,7 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "230"
+      priceRange: "230",
     },
     {
       id: 2,
@@ -212,22 +260,22 @@ const LeagueMatchList = () => {
       time: "19:45",
       venue: "Wembley Stadium, London",
       country: "United Kingdom",
-      priceRange: "150"
+      priceRange: "150",
     },
-
   ];
 
   return (
     <section className=" bg-white">
       <div className="ticket-container">
-
         <div className="mt-6 lg:mt-14 font-light text-sm text-gray-500">
           <ul
             aria-label="breadcrumbs"
-            className="text-ltg-grey-1 font-roboto flex flex-wrap items-center gap-x-3 uppercase"
-          >
+            className="text-ltg-grey-1 font-roboto flex flex-wrap items-center gap-x-3 uppercase">
             <li>
-              <a href="/" data-testid="breadcrumb" className="whitespace-nowrap hover:underline">
+              <a
+                href="/"
+                data-testid="breadcrumb"
+                className="whitespace-nowrap hover:underline">
                 Home
               </a>
               <span className="pl-3 text-xl lg:text-2xl font-bold">▸</span>
@@ -236,41 +284,37 @@ const LeagueMatchList = () => {
               <a
                 href="/league?league=Premier League"
                 data-testid="breadcrumb"
-                className="whitespace-nowrap hover:underline"
-              >
+                className="whitespace-nowrap hover:underline">
                 {league}
               </a>
               <span className="pl-3 text-xl lg:text-2xl font-bold"></span>
             </li>
-
           </ul>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-
           <div className="lg:col-span-7 py-4">
             <LeagueCard leagueName={league} />
 
             <div className="lg:col-span-7 py-6">
-              <div className="text-xl font-medium py-2 ">Upcoming English Premier League Fixtures</div>
-              <div className="flex items-center gap-1 sm:gap-4 border-b py-4">
-                <button aria-pressed="true" className="bg-ltg-white w-full rounded-3xl py-3 text-center text-sm font-normal max-w-36 border-2 px-0 border-ltg-green text-ltg-green">
-                  <span className="hidden sm:inline">All</span>
-                  <span className="sm:hidden">All</span>
-                </button>
-                <button aria-pressed="false" className="bg-ltg-white text-ltg-black w-full rounded-3xl py-3 text-center text-sm font-normal border-ltg-grey-2 max-w-36 border-2 px-0">
-                  <span className="hidden sm:inline">Upcoming 30 days</span>
-                  <span className="sm:hidden">30 days</span>
-                </button></div>
-              {matches.map((match) => (
-                <MatchRow key={match.id} {...match} />
-              ))}
+              <div className="text-xl font-medium py-2 ">
+                Upcoming English Premier League Fixtures
+              </div>
+              <FilterButton />
+
+              <div className="max-h-[600px] overflow-y-auto space-y-2">
+                {matches.map((match) => (
+                  <MatchRow key={match.id} {...match} />
+                ))}
+              </div>
             </div>
           </div>
 
           <div className="lg:col-span-4 space-y-16">
             <div className="space-y-4 border-b py-4">
-              <div className="text-xl font-medium py-4 border-b">Why Book With Us?</div>
+              <div className="text-xl font-medium py-4 border-b">
+                Book With Confidence
+              </div>
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <svg
@@ -282,8 +326,7 @@ const LeagueMatchList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-green-600"
-                  >
+                    className="text-sky-500">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -306,8 +349,7 @@ const LeagueMatchList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-green-600"
-                  >
+                    className="text-sky-500">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -330,8 +372,7 @@ const LeagueMatchList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-green-600"
-                  >
+                    className="text-sky-500">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -354,14 +395,15 @@ const LeagueMatchList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-green-600"
-                  >
+                    className="text-sky-500">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <h3 className="font-light text-sm">150% Money Back Guarantee</h3>
+                  <h3 className="font-light text-sm">
+                    150% Money Back Guarantee
+                  </h3>
                 </div>
               </div>
             </div>
@@ -375,15 +417,11 @@ const LeagueMatchList = () => {
                 />
               ))}
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );
 };
-
 
 export default LeagueMatchList;

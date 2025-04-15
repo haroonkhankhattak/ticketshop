@@ -6,13 +6,13 @@ interface TeamCardProps {
   name: string;
   imageUrl: string;
   link: string;
+  logoUrl: string;
 }
 
-const TeamCard: React.FC<TeamCardProps> = ({ name, imageUrl, link }) => {
+const TeamCard: React.FC<TeamCardProps> = ({ name, imageUrl, link, logoUrl }) => {
   return (
     <Link to={link} className="relative group rounded-lg overflow-hidden">
       <div className="aspect-[16/9] overflow-hidden">
-
         <img
           src={imageUrl}
           alt={`${name} fans`}
@@ -21,13 +21,22 @@ const TeamCard: React.FC<TeamCardProps> = ({ name, imageUrl, link }) => {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
         <div className="absolute bottom-0 w-full p-4 flex justify-between items-center">
-          <h3 className="font-semibold text-l">
-            <span className="text-ticket-red">{name}</span> <span className="text-white">Tickets</span>
-          </h3>
+          <div className="flex items-center">
+            {/* Logo */}
+            <img
+              src={logoUrl} // Add logo image URL
+              alt={`${name} logo`}
+              className="w-8 h-8 object-contain mr-2" // Adjust size and margin
+            />
+            <h3 className="font-semibold text-l">
+              <span className="text-ticket-red">{name}</span> <span className="text-white">Tickets</span>
+            </h3>
+          </div>
           <ChevronRight className="text-white transition-transform group-hover:translate-x-1" />
         </div>
       </div>
     </Link>
+
   );
 };
 
@@ -37,21 +46,25 @@ const PopularTeams = () => {
       name: "Arsenal",
       imageUrl: "/uploads/teamfans/Arsenal.webp",
       link: "/matches?team=Arsenal&league=Premier League",
+      logoUrl: "/uploads/teamlogo/Arsenal.webp",
     },
     {
       name: "Chelsea",
       imageUrl: "/uploads/teamfans/Chelsea.webp",
       link: "/matches?team=Chelsea&league=Premier League",
+      logoUrl: "/uploads/teamlogo/Chelsea.webp",
     },
     {
       name: "Liverpool",
       imageUrl: "/uploads/teamfans/Liverpool.webp",
       link: "/matches?team=Liverpool&league=Premier League",
+      logoUrl: "/uploads/teamlogo/Liverpool.webp",
     },
     {
       name: "Manchester United",
       imageUrl: "/uploads/teamfans/Manchester United.webp",
       link: "/matches?team=Manchester United&league=Premier League",
+      logoUrl: "/uploads/teamlogo/manchester_united.webp",
     },
   ];
 
@@ -66,6 +79,7 @@ const PopularTeams = () => {
               name={team.name}
               imageUrl={team.imageUrl}
               link={team.link}
+              logoUrl={team.logoUrl}
             />
           ))}
         </div>

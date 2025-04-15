@@ -1,43 +1,386 @@
-import React, { useState, useEffect, useRef } from "react";
-import Header from "../../components/Header";
+import React, { useEffect, useState } from "react";
+import Header from "../../components/layout/Header";
 import TrustPilotRow from "../../components/TrustpilotRow";
-import TicketsCard from "../../components/TicketsCard";
+import Footer from "../../components/layout/Footer";
+// import HeroSection from "../../components/Hero";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import TicketList from "../../components/TicketList";
-import Testimonials from "../../components/Testimonials";
-import RecentNews from "../../components/RecentNews";
-import FootballTickets from "../../components/FootballTickets";
-import Footer from "../../components/Footer";
-import { useSearchParams } from "react-router-dom";
-import MatchCard from "@/components/MatchCard";
-
+import SupportInfo from "../../components/tickets/SupportInfo";
+import StadiumSection from "../../components/tickets/StadiumSection";
+import MatchInfo from "../../components/tickets/MatchInfo";
+import HeroSection from "../../components/tickets/HeroSection";
+import { Calendar, MapPin, CheckCircle, Info, Filter } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Tickets = () => {
-  const [searchParams] = useSearchParams();
-  const matchid = searchParams.get("matchid");
+  const [selectedArea, setSelectedArea] = useState<string>("main-stand");
+  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const titles = ["Home", "Premier League", "Liverpool vs West Ham United"];
+  const links = [
+    "/",
+    "/league?league=Premier League",
+    "/matches?team=Liverpool",
+  ];
 
+  const [ticketQuantity, setTicketQuantity] = useState<string>("1");
+  const [priceRange, setPriceRange] = useState<string>("£199 - £1,000");
+  const [location, setLocation] = useState<string>("All");
+  const [seatedTogether, setSeatedTogether] = useState<boolean>(true);
 
-  // useEffect(() => {
+  // Mock ticket data with more detailed section information
+  const tickets = [
+    {
+      id: 1,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "main-stand",
+      section: "L11",
+      row: "22",
+      price: 195,
+      availability: 8,
+    },
+    {
+      id: 2,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "kop",
+      section: "204",
+      row: "15",
+      price: 220,
+      availability: 4,
+    },
+    {
+      id: 3,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "KJ",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
+    {
+      id: 1,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "main-stand",
+      section: "L11",
+      row: "22",
+      price: 195,
+      availability: 8,
+    },
+    {
+      id: 2,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "kop",
+      section: "204",
+      row: "15",
+      price: 220,
+      availability: 4,
+    },
+    {
+      id: 3,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "KJ",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
 
+    {
+      id: 4,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "anfield-road",
+      section: "AU4",
+      row: "18",
+      price: 165,
+      availability: 6,
+    },
+    {
+      id: 5,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "main-stand",
+      section: "M3",
+      row: "5",
+      price: 225,
+      availability: 3,
+    },
+    {
+      id: 6,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "kop",
+      section: "305",
+      row: "7",
+      price: 210,
+      availability: 2,
+    },
+  ];
 
+  // Area name mapping
+  const areaNames: Record<string, string> = {
+    "main-stand": "Main Stand",
+    kop: "The Kop",
+    "sir-kenny-dalglish": "Sir Kenny Dalglish Stand",
+    "anfield-road": "Anfield Road Stand",
+  };
 
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: "smooth",
-  //   });
+  const handleAreaClick = (area: string) => {
+    setSelectedArea(area);
+    setSelectedSeat(null);
+  };
 
-  // }, []);
+  const handleTicketHover = (ticketArea: string, ticketSection?: string) => {
+    setSelectedArea(ticketArea);
+    if (ticketSection) {
+      setSelectedSeat(ticketSection);
+    }
+  };
 
+  const handleTicketSelect = (id: number) => {
+    const ticket = tickets.find((t) => t.id === id);
+    if (ticket) {
+      setSelectedSeat(ticket.section);
+      setSelectedArea(ticket.area);
+    }
+  };
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   return (
-    <div className="min-h-screen flex-grow">
+    <div className="min-h-screen flex flex-col">
       <Header isScrolledPastHero={true} fixed={false} />
       <main className="flex-grow">
-        <TrustPilotRow />
-        <TicketList />
-        <Testimonials />
-        <RecentNews />
-        <FootballTickets />
+        {/* <TrustPilotRow /> */}
+
+        {/* Hero Section */}
+        <HeroSection />
+
+        {/* Main Content */}
+        <section className="py-8">
+          <div className="ticket-container">
+            {/* <Breadcrumbs titles={titles} links={links} /> */}
+
+            {/* Ticket filters */}
+            <Card className="bg-gray-100 p-2 rounded-sm">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8">
+                <div>
+                  <h3 className="text-base  font-semibold mb-3">
+                    How many tickets are you booking?
+                  </h3>
+                  <div className="flex">
+                    <Button
+                      variant={ticketQuantity === "ANY" ? "default" : "outline"}
+                      className="rounded-l-md rounded-r-none border-r-0"
+                      onClick={() => setTicketQuantity("ANY")}>
+                      ANY
+                    </Button>
+                    <Button
+                      variant={ticketQuantity === "1" ? "default" : "outline"}
+                      className="rounded-none border-r-0"
+                      onClick={() => setTicketQuantity("1")}>
+                      1
+                    </Button>
+                    <Button
+                      variant={ticketQuantity === "2" ? "default" : "outline"}
+                      className="rounded-none border-r-0"
+                      onClick={() => setTicketQuantity("2")}>
+                      2
+                    </Button>
+                    <Button
+                      variant={ticketQuantity === "3" ? "default" : "outline"}
+                      className="rounded-none border-r-0"
+                      onClick={() => setTicketQuantity("3")}>
+                      3
+                    </Button>
+                    <Button
+                      variant={ticketQuantity === "4" ? "default" : "outline"}
+                      className="rounded-none border-r-0"
+                      onClick={() => setTicketQuantity("4")}>
+                      4
+                    </Button>
+                    <Button
+                      variant={ticketQuantity === "5+" ? "default" : "outline"}
+                      className="rounded-r-md rounded-l-none"
+                      onClick={() => setTicketQuantity("5+")}>
+                      5+
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col h-full">
+                  <div className="mt-auto">
+                    <label className="inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={seatedTogether}
+                        onChange={() => setSeatedTogether(!seatedTogether)}
+                        className="sr-only peer"
+                      />
+                      <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ticket-red"></div>
+                      <span className="ms-3 text-sm font-medium text-gray-700">
+                        Stay together
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3">Price range</h3>
+                  <Select value={priceRange} onValueChange={setPriceRange}>
+                    <SelectTrigger className="w-full bg-white">
+                      <SelectValue placeholder="Select a price range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="£199 - £1,000">
+                        £199 - £1,000
+                      </SelectItem>
+                      <SelectItem value="£199 - £500">£199 - £500</SelectItem>
+                      <SelectItem value="£500 - £1,000">
+                        £500 - £1,000
+                      </SelectItem>
+                      <SelectItem value="£1,000+">£1,000+</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-medium mb-3">Location</h3>
+                  <Select value={location} onValueChange={setLocation}>
+                    <SelectTrigger className="w-full bg-white">
+                      <SelectValue placeholder="Select a location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="All">All</SelectItem>
+                      <SelectItem value="Main Stand">Main Stand</SelectItem>
+                      <SelectItem value="The Kop">The Kop</SelectItem>
+                      <SelectItem value="Anfield Road Stand">
+                        Anfield Road Stand
+                      </SelectItem>
+                      <SelectItem value="Sir Kenny Dalglish Stand">
+                        Sir Kenny Dalglish Stand
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </Card>
+
+            <div className="flex justify-between items-center mt-4">
+              <div className="text-gray-600 text-sm">
+                <span className="text-gray-800">
+                  <strong>166 results</strong>
+                </span>{" "}
+                based on your search
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-gray-600 gap-2">
+                <Filter size={16} />
+                Clear all filters
+              </Button>
+            </div>
+
+            {/* Available tickets section */}
+            <div className="mt-8 border-b pb-4">
+              <h2 className="text-xl font-semibold">Available Tickets</h2>
+              <p className="text-gray-600 text-sm mt-2">
+                Tickets are listed and priced by our trusted ticket partners
+                competing with each other to deliver you the best seats and
+                lowest prices. Find your seats, select the number of tickets,
+                then click 'Get Now' to proceed.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Left Column - Ticket Details */}
+              <div className="lg:col-span-5 max-h-[calc(100vh-100px)] overflow-y-auto pr-2 mt-8">
+                {/* <div className="bg-white rounded-lg shadow-sm border p-6 mb-2">
+                  <div className="flex items-center text-gray-600 mb-2">
+                    <Calendar size={16} className="mr-2" />
+                    <span>14 April 2025 | 15:00</span>
+                  </div>
+                  <div className="flex items-center text-gray-600 mb-2">
+                    <MapPin size={16} className="mr-2" />
+                    <span>Anfield, Liverpool</span>
+                  </div>
+                </div> */}
+
+                <TicketList
+                  tickets={tickets}
+                  selectedSeat={selectedSeat}
+                  areaNames={areaNames}
+                  onTicketHover={(area, section) =>
+                    handleTicketHover(area, section)
+                  }
+                  onTicketSelect={handleTicketSelect}
+                  selectedArea={selectedArea}
+                />
+
+                {/* <SupportInfo /> */}
+              </div>
+
+              {/* Right Column - 2D Stadium View */}
+              <div className="lg:col-span-7">
+                <div className="sticky top-0">
+                  <StadiumSection
+                    selectedArea={selectedArea}
+                    onAreaClick={handleAreaClick}
+                    areaNames={areaNames}
+                  />
+                  {/* <MatchInfo /> */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
@@ -46,18 +389,66 @@ const Tickets = () => {
 
 export default Tickets;
 
-
-
-
-// import { useParams } from "react-router-dom";
+// import React, { useState, useEffect, useRef } from "react";
+// import Header from "../../components/layout/Header";
+// import TrustPilotRow from "../../components/TrustpilotRow";
+// import TicketsCard from "../../components/TicketsCard";
+// import TicketList from "../../components/TicketList";
+// import Testimonials from "../../components/Testimonials";
+// import RecentNews from "../../components/RecentNews";
+// import FootballTickets from "../../components/FootballTickets";
+// import Footer from "../../components/layout/Footer";
+// import { useSearchParams } from "react-router-dom";
+// import MatchCard from "@/components/MatchCard";
 
 // const Tickets = () => {
-//   const { matchId } = useParams(); // Get match ID from the URL
+//   const [searchParams] = useSearchParams();
+//   const matchid = searchParams.get("matchid");
 
 //   return (
-//     <div>
-//       <h1>Match ID: {matchId}</h1>
-//       <p>Loading tickets for match {matchId}...</p>
+//     <div className="min-h-screen flex-grow">
+//       <Header isScrolledPastHero={true} fixed={false} />
+//       <main className="flex-grow">
+//         <TrustPilotRow />
+//         <TicketList />
+//         <Testimonials />
+//         <RecentNews />
+//         <FootballTickets />
+//       </main>
+//       <Footer />
+//     </div>
+//   );
+// };
+
+// export default Tickets;
+
+// import React, { useState, useEffect, useRef } from "react";
+// import Header from "../../components/layout/Header";
+// import TrustPilotRow from "../../components/TrustpilotRow";
+// import TicketsCard from "../../components/TicketsCard";
+// import TicketList from "../../components/TicketList";
+// import Testimonials from "../../components/Testimonials";
+// import RecentNews from "../../components/RecentNews";
+// import FootballTickets from "../../components/FootballTickets";
+// import Footer from "../../components/layout/Footer";
+// import { useSearchParams } from "react-router-dom";
+// import MatchCard from "@/components/MatchCard";
+
+// const Tickets = () => {
+//   const [searchParams] = useSearchParams();
+//   const matchid = searchParams.get("matchid");
+
+//   return (
+//     <div className="min-h-screen flex-grow">
+//       <Header isScrolledPastHero={true} fixed={false} />
+//       <main className="flex-grow">
+//         <TrustPilotRow />
+//         <TicketList />
+//         <Testimonials />
+//         <RecentNews />
+//         <FootballTickets />
+//       </main>
+//       <Footer />
 //     </div>
 //   );
 // };

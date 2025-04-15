@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/layout/Header";
 import TrustPilotRow from "../../components/TrustpilotRow";
 import MatchLeague from "../../components/MatchLeague";
 import LeagueMatchList from "../../components/LeagueMatchList";
 import Testimonials from "../../components/Testimonials";
 import LeagueRecentNews from "../../components/LeagueRecentNews";
 import LeagueTickets from "../../components/LeagueTickets";
-import Footer from "../../components/Footer";
+import Footer from "../../components/layout/Footer";
 import { useSearchParams } from "react-router-dom";
 
 
@@ -34,7 +34,7 @@ const League = () => {
     <div className="min-h-screen flex-grow">
       <Header isScrolledPastHero={true} fixed={false} />
       <main className="flex-grow">
-        <TrustPilotRow />
+        {/* <TrustPilotRow /> */}
         <LeagueMatchList />
         <Testimonials />
         <LeagueRecentNews league={"English Premier League"} />

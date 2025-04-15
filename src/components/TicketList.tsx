@@ -1,421 +1,225 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { MapPin, Clock } from "lucide-react";
-import LeagueCard from "./LeagueCard";
+import { CheckCircle } from "lucide-react";
+import { useState } from "react";
+import CustomDropdown from "@/components/DropdownSelector";
+import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
+import { Armchair } from "lucide-react";
+import { TicketIcon } from "lucide-react";
 
-interface MatchProps {
-    id: number;
-    date: string;
-    month: string;
-    year: string;
-    competition: string;
-    teams: string;
-    time: string;
-    venue: string;
-    country: string;
+import { Minus, Plus } from "lucide-react";
+
+interface Ticket {
+  id: number;
+  match: string;
+  date: string;
+  time: string;
+  competition: string;
+  venue: string;
+  area: string;
+  section: string;
+  row: string;
+  price: number;
+  availability: number;
 }
 
-interface Team {
-    name: string;
-    link: string;
+interface TicketListProps {
+  tickets: Ticket[];
+  selectedSeat: string | null;
+  areaNames: Record<string, string>;
+  onTicketHover: (area: string, section?: string) => void;
+  onTicketSelect: (id: number) => void;
+  selectedArea: string;
 }
 
-interface LeagueSectionProps {
-    title: string;
-    teams: Team[];
-    viewAllLink: string;
-}
-
-const LeagueSection: React.FC<LeagueSectionProps> = ({ title, teams, viewAllLink }) => {
-    return (
-        <div className="mb-16">
-            <h2 className="font-dosis text-ltg-black text-lg font-medium capitalize pb-3">{title}</h2>
-            <ul className="text-sm">
-                {teams.map((team, index) => (
-                    <li key={index} className="border-ltg-grey-4 border-t py-2 last:border-b">
-                        <a href={team.link} className="flex hover:underline">{team.name}</a>
-                    </li>
-                ))}
-            </ul>
-            <a href={viewAllLink} className="text-ltg-grey-1 inline-block pt-3 text-gray-500 text-sm">
-                View all {title} <span className="capitalize">tickets</span>&nbsp;»
-            </a>
-        </div>
-    );
-};
-
-const leagues = [
-    {
-        title: "English Premier League",
-        viewAllLink: "/english-premiership-tickets.html",
-        teams: [
-            { name: "Arsenal", link: "/matches?team=Arsenal&league=Premier League" },
-            { name: "Aston Villa", link: "/matches?team=Aston Villa&league=Premier League" },
-            { name: "Chelsea", link: "/matches?team=Chelsea&league=Premier League" },
-            { name: "Everton", link: "/matches?team=Everton&league=Premier League" },
-            { name: "Fulham", link: "/matches?team=Fulham&league=Premier League" },
-            { name: "Liverpool", link: "/matches?team=Liverpool&league=Premier League" },
-            { name: "Manchester City", link: "/matches?team=Manchester City&league=Premier League" },
-            { name: "Manchester United", link: "/matches?team=Manchester United&league=Premier League" },
-            { name: "Newcastle United", link: "/matches?team=Newcastle United&league=Premier League" },
-        ]
-    },
-    {
-        title: "Spanish La Liga",
-        viewAllLink: "/la-liga-tickets.html",
-        teams: [
-            { name: "FC Barcelona", link: "/la-liga/fc-barcelona-tickets.html" },
-            { name: "Real Madrid", link: "/la-liga/real-madrid-tickets.html" }
-        ]
-    },
-    {
-        title: "National Football Teams",
-        viewAllLink: "/national-football-teams-tickets.html",
-        teams: [
-            { name: "England", link: "/national-football-teams/england-football-tickets.html" },
-            { name: "Scotland", link: "/national-football-teams/scotland-football-tickets.html" }
-        ]
-    },
-    {
-        title: "Champions League",
-        viewAllLink: "/champions-league-tickets.html",
-        teams: [
-            { name: "Real Madrid", link: "/champions-league/real-madrid-tickets.html" },
-            { name: "Bayern Munich", link: "/champions-league/bayern-munich-tickets.html" }
-        ]
-    },
-    {
-        title: "Italian Serie A",
-        viewAllLink: "/serie-a-tickets.html",
-        teams: [
-            { name: "AC Milan", link: "/serie-a/ac-milan-tickets.html" },
-            { name: "AS Roma", link: "/serie-a/as-roma-tickets.html" }
-        ]
-    }
-];
-
-
-const MatchRow: React.FC<MatchProps> = ({
-    id,
-    date,
-    month,
-    year,
-    competition,
-    teams,
-    time,
-    venue,
-    country,
+const TicketList: React.FC<TicketListProps> = ({
+  tickets,
+  selectedSeat,
+  areaNames,
+  onTicketHover,
+  onTicketSelect,
+  selectedArea,
 }) => {
-    return (
-        <Link to={`/tickets/${id}`} className="block">
-            <div className="grid grid-cols-12 items-center border-b border-gray-200 group hover:bg-gray-100 cursor-pointer transition">
-                <div className="col-span-1 bg-gray-50 text-center group-hover:bg-gray-200 transition">
-                    <div className="py-5">
-                        <div className="uppercase text-xs text-gray-800">{month}</div>
-                        <div className="text-3xl font-bold">{date}</div>
-                        <div className="text-sm text-gray-400">{year}</div>
-                    </div>
-                </div>
+  // Filter tickets to show only those in the selected area or all if none selected
+  const displayTickets = selectedArea
+    ? tickets.filter((ticket) => ticket.area === selectedArea)
+    : tickets;
+  const maxLimit = 10;
 
-                <div className="col-span-8 pl-4">
-                    <div className="text-xs text-gray-500 uppercase mb-1 group-hover:text-black transition">
-                        {competition}
-                    </div>
-                    <div className="text-lg font-medium mb-1 group-hover:text-ticket-red transition">{teams}</div>
-                    <div className="flex items-center font-light text-sm text-gray-600 group-hover:text-gray-800 transition">
-                        <Clock size={14} className="mr-1" />
-                        {time}
-                        <span className="mx-2">•</span>
-                        <MapPin size={14} className="mr-1" />
-                        {venue}, {country}
-                    </div>
-                </div>
+  const [ticketCount, setTicketCount] = useState<{ [key: string]: number }>({});
 
-                <div className="col-span-3 px-4 text-right">
-                    <Link
-                        to={`/match/${id}`}
-                        className="btn-primary inline-block text-sm px-8 group-hover:bg-green-700 transition rounded-full"
-                    >
-                        View Tickets
-                    </Link>
-                </div>
+  const increment = (id: number) => {
+    setTicketCount((prev) => {
+      const current = prev[id] || 1;
+      if (current >= 10) return prev; // max limit
+      return { ...prev, [id]: current + 1 };
+    });
+  };
 
-            </div>
-        </Link>
+  const decrement = (id: number) => {
+    setTicketCount((prev) => {
+      const current = prev[id] || 1;
+      if (current <= 1) return prev; // min limit
+      return { ...prev, [id]: current - 1 };
+    });
+  };
 
-    );
-};
+  return (
+    <div className="bg-white rounded-lg">
+      {/* <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-2">Liverpool vs West Ham United</h2>
+                <div className="text-sm text-green-600 font-medium mb-4">Premier League</div>
+            </div> */}
 
-const TicketList = () => {
-    const matches = [
-        {
-            id: 3,
-            date: "28",
-            month: "MAR",
-            year: "2025",
-            competition: "ENGLISH PREMIER LEAGUE",
-            teams: "Arsenal vs Fulham",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-            priceRange: "110"
-        },
-        {
-            id: 4,
-            date: "01",
-            month: "APR",
-            year: "2025",
-            competition: "ENGLISH PREMIER LEAGUE",
-            teams: "Japan vs South Africa",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-            priceRange: "320"
-        },
-        {
-            id: 1,
-            date: "21",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Albania",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 2,
-            date: "24",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Latvia",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 3,
-            date: "28",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "Arsenal vs Fulham",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 4,
-            date: "01",
-            month: "APR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "Japan vs South Africa",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 5,
-            date: "24",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Latvia",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 6,
-            date: "24",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Latvia",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 1,
-            date: "21",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Albania",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 2,
-            date: "24",
-            month: "MAR",
-            year: "2025",
-            competition: "EUROPEAN QUALIFIERS",
-            teams: "England vs Latvia",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-        },
-        {
-            id: 1,
-            date: "21",
-            month: "MAR",
-            year: "2025",
-            competition: "ENGLISH PREMIER LEAGUE",
-            teams: "Liverpool vs Fulham",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-            priceRange: "230"
-        },
-        {
-            id: 2,
-            date: "24",
-            month: "MAR",
-            year: "2025",
-            competition: "ENGLISH PREMIER LEAGUE",
-            teams: "Everton vs Chelsea",
-            time: "19:45",
-            venue: "Wembley Stadium, London",
-            country: "United Kingdom",
-            priceRange: "150"
-        },
-
-    ];
-
-    return (
-        <section className="py-8 bg-white">
-            <div className="ticket-container">
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-                    <div className="lg:col-span-8">
-                        <div className="text-xl font-medium py-4 border-b">Most Popular Football Tickets</div>
-                        {matches.map((match) => (
-                            <MatchRow key={match.id} {...match} />
-                        ))}
-                    </div>
-
-                    <div className="lg:col-span-4 space-y-16">
-                        <div className="space-y-4 border-b py-4">
-                            <div className="text-xl font-medium py-4 border-b">Why Book With Us?</div>
-                            <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        width="18"
-                                        height="18"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="text-green-600"
-                                    >
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
+      <div className="mb-6">
+        {/* <h3 className="text-lg font-semibold mb-4">
+                    {selectedArea ? `${areaNames[selectedArea]} Tickets` : 'Available Tickets'}
+                </h3> */}
+        <div className="space-y-4">
+          {/* {displayTickets.map((ticket) => (
+                        <div
+                            key={ticket.id}
+                            className={`border rounded-lg p-4 cursor-pointer transition-colors hover:border-green-500 ${selectedSeat === ticket.section ? 'border-green-500 bg-green-50' : ''}`}
+                            onMouseEnter={() => onTicketHover(ticket.area, ticket.section)}
+                            onMouseLeave={() => onTicketHover(selectedArea)}
+                            onClick={() => onTicketSelect(ticket.id)}
+                        >
+                            <div className="flex justify-between items-start mb-3">
+                                <div>
+                                    <div className="font-medium">{areaNames[ticket.area]}</div>
+                                    <div className="text-sm text-gray-500">Section {ticket.section}, Row {ticket.row}</div>
                                 </div>
-                                <div className="ml-3">
-                                    <h3 className="font-light text-sm">
-                                        Champions League level Customer support
-                                    </h3>
-                                </div>
+                                <div className="text-xl font-bold text-green-600">£{ticket.price}</div>
                             </div>
-
-                            <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        width="18"
-                                        height="18"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="text-green-600"
-                                    >
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
-                                </div>
-                                <div className="ml-3">
-                                    <h3 className="font-light text-sm">
-                                        5 star rating on Trustpilot (13k+ reviews)
-                                    </h3>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        width="18"
-                                        height="18"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="text-green-600"
-                                    >
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
-                                </div>
-                                <div className="ml-3">
-                                    <h3 className="font-light text-sm">
-                                        Best ticket selection and prices
-                                    </h3>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start">
-                                <div className="flex-shrink-0 mt-1">
-                                    <svg
-                                        viewBox="0 0 24 24"
-                                        width="18"
-                                        height="18"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="text-green-600"
-                                    >
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
-                                </div>
-                                <div className="ml-3">
-                                    <h3 className="font-light text-sm">150% Money Back Guarantee</h3>
-                                </div>
+                            <div className="flex justify-between items-center">
+                                <div className="text-sm text-gray-500">{ticket.availability} tickets available</div>
+                                <button className="px-4 py-1 bg-green-600 text-white text-sm rounded-full hover:bg-green-700 transition-colors">
+                                    Select
+                                </button>
                             </div>
                         </div>
+                    ))} */}
 
-                        <div>
-                            {leagues.map((league, index) => (
-                                <LeagueSection
-                                    key={index}
-                                    title={league.title}
-                                    teams={league.teams}
-                                    viewAllLink={league.viewAllLink}
-                                />
-                            ))}
-                        </div>
+          {displayTickets.map((ticket) => (
+            <div
+              key={ticket.id}
+              className={`relative bg-white rounded-lg p-4 group ticket-red shadow border cursor-pointer transition-colors  ${
+                selectedSeat === ticket.section ? " bg-green-500" : ""
+              }`}
+              onMouseEnter={() => onTicketHover(ticket.area, ticket.section)}
+              onMouseLeave={() => onTicketHover(selectedArea)}
+              onClick={() => onTicketSelect(ticket.id)}>
+              {/* Counter top right */}
+              <div className="absolute top-2 right-2 z-10">
+                <div className="flex items-center p-1 gap-1 rounded-sm bg-white">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      decrement(ticket.id);
+                    }}
+                    className="bg-gray-100 hover:bg-ticket-red hover:text-white transition-colors p-2 rounded-full">
+                    <Minus className="w-3 h-3" />
+                  </button>
 
-                    </div>
+                  <div className="flex flex-col items-center px-1">
+                    <span className="text-lg font-medium text-center min-w-[1.5rem]">
+                      {ticketCount[ticket.id] || 1} &nbsp;
+                      <span className="text-xs font-light text-center whitespace-nowrapn">
+                        Ticket{(ticketCount[ticket.id] || 1) > 1 ? "s" : ""}
+                      </span>
+                    </span>
+                  </div>
 
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      increment(ticket.id);
+                    }}
+                    className="bg-gray-100 hover:bg-ticket-red hover:text-white transition-colors p-2 rounded-full">
+                    <Plus className="w-3 h-3" />
+                  </button>
                 </div>
-            </div>
-        </section>
-    );
-};
+              </div>
 
+              {/* Header */}
+              <header className="">
+                <h3 className="text-gray-800 text-base font-semibold group-hover:text-ticket-red ">
+                  <span>{areaNames[ticket.area]}</span>
+                  <span className="block text-sm text-gray-500 ml-1 group-hover:text-black">
+                    Section {ticket.section}, Row {ticket.row}
+                  </span>
+                </h3>
+              </header>
+
+              <ul className="flex flex-wrap gap-2 text-xs mb-3">
+                <li>
+                  <span className="bg-gray-100 border border-gray-300 text-gray-600 rounded-md px-2 py-1 inline-flex items-center gap-1">
+                    <DevicePhoneMobileIcon className="w-3 h-3" />
+                    Mobile ticket
+                  </span>
+
+                  {/* <span className="bg-gray-100 border border-gray-300 text-gray-600 rounded-md px-2 py-1 inline-flex items-center gap-1">
+                                        <TicketIcon className="w-3 h-3" />
+                                        E-ticket
+                                    </span> */}
+                </li>
+                <li>
+                  <span className="bg-gray-100 border border-gray-300 text-gray-600 rounded-md px-2 py-1 inline-flex items-center gap-1">
+                    <Armchair className="w-3 h-3" />
+                    Single seat
+                  </span>
+                </li>
+              </ul>
+
+              {/* Tags */}
+              <ul className="flex flex-wrap gap-2 text-xs mb-3">
+                {/* ... your tags ... */}
+              </ul>
+
+              {/* Bottom Row */}
+              <div className="flex justify-between items-center">
+                <div className="text-sm text-gray-500">
+                  {ticket.availability} tickets available
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="text-lg font-semibold text-black">
+                    £{ticket.price}{" "}
+                    <span className="font-thin text-sm text-gray-500">
+                      / Ticket
+                    </span>
+                  </div>
+                  <button className="px-4 py-2 bg-black text-white text-sm rounded-full group-hover:bg-ticket-red transition-colors">
+                    Book Ticket
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      {/* 
+      <div className="mt-4 space-y-3">
+        <h3 className="text-lg font-semibold">Ticket Information</h3>
+        <div className="flex items-start">
+          <CheckCircle size={16} className="text-green-600 mt-1 mr-2" />
+          <span className="text-sm">
+            All tickets are 100% guaranteed and delivered securely via email.
+          </span>
+        </div>
+        <div className="flex items-start">
+          <CheckCircle size={16} className="text-green-600 mt-1 mr-2" />
+          <span className="text-sm">
+            Tickets for the same group/party are always adjacent to each other.
+          </span>
+        </div>
+        <div className="flex items-start">
+          <CheckCircle size={16} className="text-green-600 mt-1 mr-2" />
+          <span className="text-sm">
+            Ticket prices include all fees and service charges.
+          </span>
+        </div>
+      </div> */}
+    </div>
+  );
+};
 
 export default TicketList;

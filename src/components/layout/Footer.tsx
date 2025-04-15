@@ -9,7 +9,9 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           {/* Company Information */}
           <div>
-            <h3 className="text-xl font-bold mb-4">LiveFootballTickets</h3>
+            <span className="font-bold text-xl mb-4 py-4">
+              Foolball<span className="text-ticket-red">Tickets</span>Hub
+            </span>
             <p className="text-sm opacity-80 mb-4">
               The world's leading football ticket marketplace, serving fans
               since 2006 with 100% guaranteed authentic tickets.
