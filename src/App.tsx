@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import Matches from "./pages/matches/Index";
 import Tickets from "./pages/tickets/Index";
 import League from "./pages/league/Index";
+import CheckoutPage from "./pages/checkout/index";
+
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,7 @@ const App = () => (
           <Route path="/competition/:competitionName" element={<Index />} />
           <Route path="/tickets/:matchId" element={<Tickets />} />
           <Route path="/track" element={<Index />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
