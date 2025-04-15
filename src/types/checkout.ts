@@ -1,0 +1,27 @@
+export interface CheckoutFormData {
+  // Step 1: Your Details
+  email: string;
+  confirmEmail: string;
+  phone: string;
+  countryCode: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  postcode: string;
+  city: string;
+  country: string;
+  acceptTerms: boolean;
+  acceptUpdates: boolean;
+
+  // Step 2: Visitor Details
+  visitorFirstName: string;
+  visitorLastName: string;
+
+  // Step 3: Payment Details
+  cardNumber: string;
+  expiryDate: string;
+  cvv: string;
+  cardHolderName: string;
+}
+
+export type CheckoutStep = "details" | "visitor" | "payment";

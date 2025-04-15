@@ -497,7 +497,7 @@ const Header = ({
       </div>
 
       {/* Main Navigation */}
-      <div className="bg-ticket-red text-white">
+      <div className="bg-black text-white">
         <div className="ticket-container">
           <nav className="flex justify-between">
             <div className="flex">
@@ -506,6 +506,48 @@ const Header = ({
                 className="navbar-link px-0 font-bold py-4 whitespace-nowrap">
                 HOME
               </Link>
+
+              <div className="relative group">
+                {/* --- Trigger Link --- */}
+                <Link
+                  to="/premier-league"
+                  className="navbar-link px-8 font-bold py-4 flex items-center whitespace-nowrap">
+                  PREMIER LEAGUE
+                  <ChevronDown size={18} className="ml-1" />
+                </Link>
+
+                {/* --- Full Width Dropdown Directly Below the Link --- */}
+                {/* <div className="absolute left-0 top-full w-screen bg-white shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-50"> */}
+                <div className="fixed left-0 w-screen bg-black shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-40">
+                  <div className="max-w-screen-md mx-auto px-6 py-8 flex flex-col space-y-4">
+                    <a
+                      href="/matches?team=Liverpool&league=Premier League"
+                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      Liverpool
+                    </a>
+                    <a
+                      href="/matches?team=Chelsea&league=Premier League"
+                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      Chelsea
+                    </a>
+                    <a
+                      href="/matches?team=Manchester United&league=Premier League"
+                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      Manchester United
+                    </a>
+                    <a
+                      href="/matches?team=Arsenal&league=Premier League"
+                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      Arsenal
+                    </a>
+                    <a
+                      href="/league?league=Premier League"
+                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      View All
+                    </a>
+                  </div>
+                </div>
+              </div>
 
               <div className="group relative">
                 <Link

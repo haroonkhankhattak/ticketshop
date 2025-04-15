@@ -150,7 +150,7 @@ const MatchRow: React.FC<MatchProps> = ({
         <div className="col-span-1 bg-gray-50 text-center group-hover:bg-gray-200 transition">
           <div className="py-5">
             <div className="uppercase text-xs text-gray-800">{month}</div>
-            <div className="text-3xl font-bold group-hover:text-ticket-red">
+            <div className="text-3xl font-bold group-hover:text-sky-700">
               {date}
             </div>
             <div className="text-sm text-gray-400">{year}</div>
@@ -158,10 +158,10 @@ const MatchRow: React.FC<MatchProps> = ({
         </div>
 
         <div className="col-span-8 pl-4">
-          <div className="text-xs text-gray-500 group-hover:text-black uppercase mb-1 group-hover:ticket-red transition">
+          <div className="text-xs text-gray-500 group-hover:text-black uppercase mb-1 group-hover:sky-700 transition">
             {competition}
           </div>
-          <div className="text-lg font-medium mb-1 group-hover:text-ticket-red text-black transition">
+          <div className="text-lg font-medium mb-1 group-hover:text-sky-700 text-black transition">
             {teams}
           </div>
           <div className="flex items-center font-light text-sm text-gray-600 group-hover:text-gray-800  transition">
@@ -176,7 +176,7 @@ const MatchRow: React.FC<MatchProps> = ({
         <div className="col-span-3 px-4 text-right">
           <Link
             to={`/match/${id}`}
-            className="btn-primary inline-block text-sm px-8 bg-black group-hover:bg-ticket-red transition rounded-full">
+            className="btn-primary inline-block text-sm px-8 bg-black group-hover:bg-sky-700 transition rounded-full">
             View Tickets
           </Link>
         </div>
@@ -415,7 +415,7 @@ const PopularMatchesList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-sky-500">
+                    className="text-sky-700">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -438,7 +438,7 @@ const PopularMatchesList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-sky-500">
+                    className="text-sky-700">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -461,7 +461,7 @@ const PopularMatchesList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-sky-500">
+                    className="text-sky-700">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
@@ -484,7 +484,7 @@ const PopularMatchesList = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="text-sky-500">
+                    className="text-sky-700">
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
