@@ -41,9 +41,8 @@ const Header = ({
 
   return (
     <header
-      className={`w-full top-0 left-0 z-50 bg-white shadow-md ${
-        fixed ? "fixed" : ""
-      }`}>
+      className={`w-full top-0 left-0 z-50 bg-white shadow-md ${fixed ? "fixed" : ""
+        }`}>
       {/* Top Info Bar */}
       {!isScrolledPastHero && (
         <div className="w-full bg-white text-gray-700 py-2 text-sm border-b">
@@ -511,84 +510,86 @@ const Header = ({
                 {/* --- Trigger Link --- */}
                 <Link
                   to="/premier-league"
-                  className="navbar-link px-8 font-bold py-4 flex items-center whitespace-nowrap">
+                  className="navbar-link px-8 font-bold py-4 flex items-center group-hover:text-ticket-red whitespace-nowrap">
                   PREMIER LEAGUE
-                  <ChevronDown size={18} className="ml-1" />
+                  {/* <ChevronDown size={18} className="ml-1" /> */}
                 </Link>
 
                 {/* --- Full Width Dropdown Directly Below the Link --- */}
-                {/* <div className="absolute left-0 top-full w-screen bg-white shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-50"> */}
-                <div className="fixed left-0 w-screen bg-black shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-40">
+                <div className="fixed left-0 w-screen bg-black/90 shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-40">
                   <div className="max-w-screen-md mx-auto px-6 py-8 flex flex-col space-y-4">
                     <a
                       href="/matches?team=Liverpool&league=Premier League"
-                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      className="text-l text-white hover:text-ticket-red transition-colors">
                       Liverpool
                     </a>
                     <a
                       href="/matches?team=Chelsea&league=Premier League"
-                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      className="text-l text-white hover:text-ticket-red transition-colors">
                       Chelsea
                     </a>
                     <a
                       href="/matches?team=Manchester United&league=Premier League"
-                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      className="text-l text-white hover:text-ticket-red transition-colors">
                       Manchester United
                     </a>
                     <a
                       href="/matches?team=Arsenal&league=Premier League"
-                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      className="text-l text-white hover:text-ticket-red transition-colors">
                       Arsenal
                     </a>
                     <a
                       href="/league?league=Premier League"
-                      className="text-lg text-white hover:text-gray-500 transition-colors">
+                      className="text-sm text-gray-500 hover:text-ticket-red transition-colors">
                       View All
                     </a>
                   </div>
                 </div>
               </div>
 
-              <div className="group relative">
+
+              <div className="relative group">
+                {/* --- Trigger Link --- */}
                 <Link
                   to="/premier-league"
-                  className="navbar-link px-8 font-bold py-4 flex items-center whitespace-nowrap">
+                  className="navbar-link px-8 font-bold py-4 flex items-center group-hover:text-ticket-red whitespace-nowrap">
                   PREMIER LEAGUE
-                  <ChevronDown size={18} className="ml-1" />
+                  {/* <ChevronDown size={18} className="ml-1" /> */}
                 </Link>
-                <div className="bg-ltg-white border-b-ltg-grey-4 shadow-ltg-grey-2 absolute z-10 hidden space-y-2 rounded-b-md px-4 py-2 shadow-lg group-hover:block bg-white min-w-[200px]">
-                  {/* <div className="bg-ltg-white border-b-ltg-grey-4 shadow-ltg-grey-2 absolute z-10 hidden space-y-2 rounded-b-md px-4 py-2 shadow-lg group-hover:block"> */}
-                  <a
-                    href="/matches?team=Liverpool&league=Premier League"
-                    className="border-b-ltg-grey-4 block min-w-[250px] border-b-2 py-3 text-left text-base text-black last:border-b-0 hover:text-opacity-50">
-                    Liverpool
-                  </a>
 
-                  <a
-                    href="/matches?team=Chelsea&league=Premier League"
-                    className="border-b-ltg-grey-4 block min-w-[250px] border-b-2 py-3 text-left text-base text-black last:border-b-0 hover:text-opacity-50">
-                    Chelsea
-                  </a>
-
-                  <a
-                    href="/matches?team=Manchester United&league=Premier League"
-                    className="border-b-ltg-grey-4 block min-w-[250px] border-b-2 py-3 text-left text-base text-black last:border-b-0 hover:text-opacity-50">
-                    Manchester United
-                  </a>
-
-                  <a
-                    href="/matches?team=Arsenal&league=Premier League"
-                    className="border-b-ltg-grey-4 block min-w-[250px] border-b-2 py-3 text-left text-base text-black last:border-b-0 hover:text-opacity-50">
-                    Arsenal
-                  </a>
-
-                  <a
-                    href="/league?league=Premier League"
-                    className="border-b-ltg-grey-4 block min-w-[250px] border-b-2 py-3 text-left text-base text-black last:border-b-0 hover:text-opacity-50">
-                    View All
-                  </a>
+                {/* --- Full Width Dropdown Directly Below the Link --- */}
+                <div className="fixed left-0 w-screen bg-black/90 shadow-xl transform scale-y-0 group-hover:scale-y-100 origin-top transition-transform duration-500 ease-in-out z-40">
+                  <div className="max-w-screen-md mx-auto px-6 py-8 flex flex-col space-y-4">
+                    <a
+                      href="/matches?team=Liverpool&league=Premier League"
+                      className="text-l text-white hover:text-ticket-red transition-colors">
+                      Liverpool
+                    </a>
+                    <a
+                      href="/matches?team=Chelsea&league=Premier League"
+                      className="text-l text-white hover:text-ticket-red transition-colors">
+                      Chelsea
+                    </a>
+                    <a
+                      href="/matches?team=Manchester United&league=Premier League"
+                      className="text-l text-white hover:text-ticket-red transition-colors">
+                      Manchester United
+                    </a>
+                    <a
+                      href="/matches?team=Arsenal&league=Premier League"
+                      className="text-l text-white hover:text-ticket-red transition-colors">
+                      Arsenal
+                    </a>
+                    <a
+                      href="/league?league=Premier League"
+                      className="text-sm text-gray-500 hover:text-ticket-red transition-colors">
+                      View All
+                    </a>
+                  </div>
                 </div>
               </div>
+
+
 
               <div className="group relative">
                 <Link
