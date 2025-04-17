@@ -51,7 +51,7 @@ const Hero = () => {
             <div className="bg-white/10 my-12 rounded-xl shadow-lg max-w-3xl mx-auto overflow-visible mb-12 animate-slide-in">
               <div className="p-6">
                 <div className="flex items-center mb-4">
-                  <Search size={20} className="text-ticket-red" />
+                  <Search size={20} className="text-ticket-lightcolor" />
                   <h2 className="text-lg font-semibold ml-2">
                     Find your perfect match
                   </h2>
@@ -74,7 +74,7 @@ const Hero = () => {
                     </div>
                   </div>
 
-                  <button className="btn-primary bg-ticket-red flex items-center justify-center">
+                  <button className="btn-primary bg-ticket-primarycolor hover:bg-ticket-red flex items-center justify-center">
                     <Search size={18} className="mr-2" />
                     Find Tickets
                   </button>
@@ -84,8 +84,8 @@ const Hero = () => {
               {/* Quick Picks */}
               <div className="px-6 py-4">
                 <div className="flex items-center mb-2">
-                  <Calendar size={16} className="text-ticket-red mr-2" />
-                  <span className="text-sm font-semibold text-ticket-white">
+                  <Calendar size={16} className="text-ticket-lightcolor mr-2" />
+                  <span className="text-sm font-semibold text-ticket-lightcolor">
                     Popular Upcoming Matches
                   </span>
                 </div>
@@ -94,15 +94,15 @@ const Hero = () => {
                     <Link
                       key={match.id}
                       to={`/match/${match.id}`}
-                      className="bg-white p-3 rounded-md hover:shadow-md transition-shadow text-sm text-ticket-red hover:text-black group">
+                      className="bg-white p-3 rounded-md hover:shadow-md text-sm text-ticket-primarycolor hover:text-ticket-red group">
                       {/* Match name wrapper */}
-                      <div className="font-medium overflow-hidden">
+                      <div className="font-medium overflow-hidden ">
                         <div className="inline-block whitespace-nowrap transition-transform duration-500 group-hover:translate-x-[-30%]">
                           {match.name}
                         </div>
                       </div>
 
-                      <div className="text-xs text-gray-500 flex items-center mt-1">
+                      <div className="text-xs text-gray-500 flex items-center group-hover:text-ticket-darkcolor mt-1">
                         <Calendar size={12} className="mr-1" />
                         {match.date}
                       </div>

@@ -22,7 +22,8 @@ import {
 } from "@/components/ui/select";
 
 const Tickets = () => {
-  const [selectedArea, setSelectedArea] = useState<string>("main-stand");
+  const [selectedArea, setSelectedArea] = useState<string | null>(null);
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
   const titles = ["Home", "Premier League", "Liverpool vs West Ham United"];
   const links = [
@@ -31,12 +32,10 @@ const Tickets = () => {
     "/matches?team=Liverpool",
   ];
 
-  const [ticketQuantity, setTicketQuantity] = useState<string>("1");
+  const [ticketQuantity, setTicketQuantity] = useState<string>("ANY");
   const [priceRange, setPriceRange] = useState<string>("£199 - £1,000");
   const [location, setLocation] = useState<string>("All");
-  const [seatedTogether, setSeatedTogether] = useState<boolean>(true);
-
-  // Mock ticket data with more detailed section information
+  const [seatedTogether, setSeatedTogether] = useState<boolean>(false);
   const tickets = [
     {
       id: 1,
@@ -46,7 +45,7 @@ const Tickets = () => {
       competition: "Premier League",
       venue: "Anfield, Liverpool",
       area: "main-stand",
-      section: "L11",
+      section: "L10",
       row: "22",
       price: 195,
       availability: 8,
@@ -77,46 +76,6 @@ const Tickets = () => {
       price: 185,
       availability: 12,
     },
-    {
-      id: 1,
-      match: "Liverpool vs West Ham United",
-      date: "14 April 2025",
-      time: "15:00",
-      competition: "Premier League",
-      venue: "Anfield, Liverpool",
-      area: "main-stand",
-      section: "L11",
-      row: "22",
-      price: 195,
-      availability: 8,
-    },
-    {
-      id: 2,
-      match: "Liverpool vs West Ham United",
-      date: "14 April 2025",
-      time: "15:00",
-      competition: "Premier League",
-      venue: "Anfield, Liverpool",
-      area: "kop",
-      section: "204",
-      row: "15",
-      price: 220,
-      availability: 4,
-    },
-    {
-      id: 3,
-      match: "Liverpool vs West Ham United",
-      date: "14 April 2025",
-      time: "15:00",
-      competition: "Premier League",
-      venue: "Anfield, Liverpool",
-      area: "sir-kenny-dalglish",
-      section: "KJ",
-      row: "10",
-      price: 185,
-      availability: 12,
-    },
-
     {
       id: 4,
       match: "Liverpool vs West Ham United",
@@ -156,18 +115,91 @@ const Tickets = () => {
       price: 210,
       availability: 2,
     },
-  ];
+    {
+      id: 7,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "KJ",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
+    {
+      id: 8,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "KJ",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
+    {
+      id: 9,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "AU3",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
 
-  // Area name mapping
-  const areaNames: Record<string, string> = {
-    "main-stand": "Main Stand",
-    kop: "The Kop",
-    "sir-kenny-dalglish": "Sir Kenny Dalglish Stand",
-    "anfield-road": "Anfield Road Stand",
+    {
+      id: 10,
+      match: "Liverpool vs West Ham United",
+      date: "14 April 2025",
+      time: "15:00",
+      competition: "Premier League",
+      venue: "Anfield, Liverpool",
+      area: "sir-kenny-dalglish",
+      section: "AU3",
+      row: "10",
+      price: 185,
+      availability: 12,
+    },
+  ];
+  const areaNames = {
+    "anfield-road-upper": "ANFIELD ROAD UPPER",
+    "anfield-road-lower": "ANFIELD ROAD LOWER",
+    "kop-grandstand": "KOP GRANDSTAND",
+    "the-kop": "THE KOP",
+    "longside-upper": "LONGSIDE UPPER",
+    "longside-lower": "LONGSIDE LOWER",
+    "main-stand-lower-tier": "MAIN STAND LOWER TIER",
+    "main-stand-upper-tier": "MAIN STAND UPPER TIER",
+    "kenny-dalglish-stand-lower-tier": "KENNY DALGLISH STAND LOWER TIER",
+    "kenny-dalglish-upper-tier": "KENNY DALGLISH UPPER TIER",
+    "away-section": "AWAY SECTION",
+    "longside-hospitality": "LONGSIDE HOSPITALITY",
+    "premier-club-executive": "PREMIER CLUB EXECUTIVE",
+    "main-stand-executive": "MAIN STAND EXECUTIVE",
+    "anfield-road-middle-tier-hospitality":
+      "ANFIELD ROAD MIDDLE TIER HOSPITALITY",
+    "centenary-club-hospitality": "CENTENARY CLUB HOSPITALITY",
+    "the-dugout-hospitality": "THE DUGOUT HOSPITALITY",
+    "beautiful-game-hospitality": "BEAUTIFUL GAME HOSPITALITY",
+    "chemistry-lounge-hospitality": "CHEMISTRY LOUNGE HOSPITALITY",
+    "beat-lounge-hospitality": "BEAT LOUNGE HOSPITALITY",
   };
 
   const handleAreaClick = (area: string) => {
     setSelectedArea(area);
+    setSelectedSeat(null);
+  };
+
+  const handleSectionClick = (section: string) => {
+    setSelectedSection(section);
     setSelectedSeat(null);
   };
 
@@ -208,7 +240,7 @@ const Tickets = () => {
             {/* <Breadcrumbs titles={titles} links={links} /> */}
 
             {/* Ticket filters */}
-            <Card className="bg-gray-100 p-2 rounded-sm">
+            <Card className="bg-white p-2 rounded-sm">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8">
                 <div>
                   <h3 className="text-base  font-semibold mb-3">
@@ -292,20 +324,17 @@ const Tickets = () => {
 
                 <div>
                   <h3 className="text-base font-medium mb-3">Location</h3>
-                  <Select value={location} onValueChange={setLocation}>
+                  <Select value={location} onValueChange={handleAreaClick}>
                     <SelectTrigger className="w-full bg-white">
                       <SelectValue placeholder="Select a location" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="All">All</SelectItem>
-                      <SelectItem value="Main Stand">Main Stand</SelectItem>
-                      <SelectItem value="The Kop">The Kop</SelectItem>
-                      <SelectItem value="Anfield Road Stand">
-                        Anfield Road Stand
-                      </SelectItem>
-                      <SelectItem value="Sir Kenny Dalglish Stand">
-                        Sir Kenny Dalglish Stand
-                      </SelectItem>
+                      {Object.entries(areaNames).map(([key, name]) => (
+                        <SelectItem key={key} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -362,6 +391,7 @@ const Tickets = () => {
                   }
                   onTicketSelect={handleTicketSelect}
                   selectedArea={selectedArea}
+                  selectedSection={selectedSection}
                 />
 
                 {/* <SupportInfo /> */}
@@ -371,9 +401,10 @@ const Tickets = () => {
               <div className="lg:col-span-7">
                 <div className="sticky top-0">
                   <StadiumSection
-                    selectedArea={selectedArea}
-                    onAreaClick={handleAreaClick}
+                    selectedArea={selectedSection}
+                    onAreaClick={handleSectionClick}
                     areaNames={areaNames}
+                    availableTickets={tickets}
                   />
                   {/* <MatchInfo /> */}
                 </div>
@@ -388,69 +419,3 @@ const Tickets = () => {
 };
 
 export default Tickets;
-
-// import React, { useState, useEffect, useRef } from "react";
-// import Header from "../../components/layout/Header";
-// import TrustPilotRow from "../../components/TrustpilotRow";
-// import TicketsCard from "../../components/TicketsCard";
-// import TicketList from "../../components/TicketList";
-// import Testimonials from "../../components/Testimonials";
-// import RecentNews from "../../components/RecentNews";
-// import FootballTickets from "../../components/FootballTickets";
-// import Footer from "../../components/layout/Footer";
-// import { useSearchParams } from "react-router-dom";
-// import MatchCard from "@/components/MatchCard";
-
-// const Tickets = () => {
-//   const [searchParams] = useSearchParams();
-//   const matchid = searchParams.get("matchid");
-
-//   return (
-//     <div className="min-h-screen flex-grow">
-//       <Header isScrolledPastHero={true} fixed={false} />
-//       <main className="flex-grow">
-//         <TrustPilotRow />
-//         <TicketList />
-//         <Testimonials />
-//         <RecentNews />
-//         <FootballTickets />
-//       </main>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default Tickets;
-
-// import React, { useState, useEffect, useRef } from "react";
-// import Header from "../../components/layout/Header";
-// import TrustPilotRow from "../../components/TrustpilotRow";
-// import TicketsCard from "../../components/TicketsCard";
-// import TicketList from "../../components/TicketList";
-// import Testimonials from "../../components/Testimonials";
-// import RecentNews from "../../components/RecentNews";
-// import FootballTickets from "../../components/FootballTickets";
-// import Footer from "../../components/layout/Footer";
-// import { useSearchParams } from "react-router-dom";
-// import MatchCard from "@/components/MatchCard";
-
-// const Tickets = () => {
-//   const [searchParams] = useSearchParams();
-//   const matchid = searchParams.get("matchid");
-
-//   return (
-//     <div className="min-h-screen flex-grow">
-//       <Header isScrolledPastHero={true} fixed={false} />
-//       <main className="flex-grow">
-//         <TrustPilotRow />
-//         <TicketList />
-//         <Testimonials />
-//         <RecentNews />
-//         <FootballTickets />
-//       </main>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default Tickets;

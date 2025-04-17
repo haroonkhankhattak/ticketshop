@@ -150,7 +150,7 @@ const MatchRow: React.FC<MatchProps> = ({
         <div className="col-span-1 bg-gray-50 text-center group-hover:bg-gray-200 transition">
           <div className="py-5">
             <div className="uppercase text-xs text-gray-800">{month}</div>
-            <div className="text-3xl font-bold group-hover:text-sky-700">
+            <div className="text-3xl font-bold group-hover:text-ticket-red">
               {date}
             </div>
             <div className="text-sm text-gray-400">{year}</div>
@@ -161,7 +161,7 @@ const MatchRow: React.FC<MatchProps> = ({
           <div className="text-xs text-gray-500 group-hover:text-black uppercase mb-1 group-hover:sky-700 transition">
             {competition}
           </div>
-          <div className="text-lg font-medium mb-1 group-hover:text-sky-700 text-black transition">
+          <div className="text-lg font-medium mb-1 group-hover:text-ticket-red text-black transition">
             {teams}
           </div>
           <div className="flex items-center font-light text-sm text-gray-600 group-hover:text-gray-800  transition">
@@ -176,7 +176,7 @@ const MatchRow: React.FC<MatchProps> = ({
         <div className="col-span-3 px-4 text-right">
           <Link
             to={`/match/${id}`}
-            className="btn-primary inline-block text-sm px-8 bg-black group-hover:bg-sky-700 transition rounded-full">
+            className="btn-primary inline-block text-sm px-8 bg-ticket-primarycolor group-hover:bg-ticket-red transition rounded-full">
             View Tickets
           </Link>
         </div>

@@ -167,7 +167,7 @@ const MatchRow: React.FC<MatchProps> = ({
       <div className="col-span-3 px-0 text-center">
         <Link
           to={`/tickets/${id}`}
-          className="btn-primary inline-block text-sm px-8 bg-black group-hover:bg-ticket-red transition rounded-full">
+          className="btn-primary inline-block text-sm px-8 bg-ticket-primarycolor group-hover:bg-ticket-red transition rounded-full">
           View Tickets
         </Link>
 

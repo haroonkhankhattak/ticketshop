@@ -9,9 +9,16 @@ interface TeamCardProps {
   logoUrl: string;
 }
 
-const TeamCard: React.FC<TeamCardProps> = ({ name, imageUrl, link, logoUrl }) => {
+const TeamCard: React.FC<TeamCardProps> = ({
+  name,
+  imageUrl,
+  link,
+  logoUrl,
+}) => {
   return (
-    <Link to={link} className="relative group rounded-lg overflow-hidden">
+    <Link
+      to={link}
+      className="relative group rounded-lg overflow-hidden transform transition-transform duration-500 ease-in-out hover:scale-105">
       <div className="aspect-[16/9] overflow-hidden">
         <img
           src={imageUrl}
@@ -29,14 +36,14 @@ const TeamCard: React.FC<TeamCardProps> = ({ name, imageUrl, link, logoUrl }) =>
               className="w-8 h-8 object-contain mr-2" // Adjust size and margin
             />
             <h3 className="font-semibold text-l">
-              <span className="text-ticket-red">{name}</span> <span className="text-white">Tickets</span>
+              <span className="text-ticket-red">{name}</span>{" "}
+              <span className="text-white">Tickets</span>
             </h3>
           </div>
           <ChevronRight className="text-white transition-transform group-hover:translate-x-1" />
         </div>
       </div>
     </Link>
-
   );
 };
 
@@ -71,7 +78,9 @@ const PopularTeams = () => {
   return (
     <section className="py-4 bg-white">
       <div className="ticket-container">
-        <h2 className="font-dosis text-xl font-medium text-black mb-6">Popular Teams</h2>
+        <h2 className="font-dosis text-xl font-medium text-black mb-6">
+          Popular Teams
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {teams.map((team) => (
             <TeamCard

@@ -29,6 +29,7 @@ interface TicketListProps {
   onTicketHover: (area: string, section?: string) => void;
   onTicketSelect: (id: number) => void;
   selectedArea: string;
+  selectedSection: string;
 }
 
 const TicketList: React.FC<TicketListProps> = ({
@@ -38,11 +39,17 @@ const TicketList: React.FC<TicketListProps> = ({
   onTicketHover,
   onTicketSelect,
   selectedArea,
+  selectedSection,
 }) => {
   // Filter tickets to show only those in the selected area or all if none selected
-  const displayTickets = selectedArea
+  let displayTickets = selectedArea
     ? tickets.filter((ticket) => ticket.area === selectedArea)
     : tickets;
+
+  displayTickets = selectedSection
+    ? tickets.filter((ticket) => ticket.section === selectedSection)
+    : tickets;
+
   const maxLimit = 10;
 
   const [ticketCount, setTicketCount] = useState<{ [key: string]: number }>({});
@@ -144,6 +151,7 @@ const TicketList: React.FC<TicketListProps> = ({
               <header className="">
                 <h3 className="text-gray-800 text-base font-semibold group-hover:text-ticket-red ">
                   <span>{areaNames[ticket.area]}</span>
+
                   <span className="block text-sm text-gray-500 ml-1 group-hover:text-black">
                     Section {ticket.section}, Row {ticket.row}
                   </span>
@@ -187,8 +195,8 @@ const TicketList: React.FC<TicketListProps> = ({
                       / Ticket
                     </span>
                   </div>
-                  <button className="px-4 py-2 bg-black text-white text-sm rounded-full group-hover:bg-ticket-red transition-colors">
-                    Book Ticket
+                  <button className="px-4 py-2 bg-ticket-primarycolor text-white text-sm rounded-full group-hover:bg-ticket-red transition-colors">
+                    Buy Now
                   </button>
                 </div>
               </div>
