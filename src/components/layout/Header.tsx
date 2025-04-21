@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { language } from "i18next";
 
 const Header = ({
   isScrolledPastHero,
@@ -31,6 +32,14 @@ const Header = ({
     { id: "5", code: "SEK", symbol: "kr", name: "Swedish Krona" },
     { id: "6", code: "NOK", symbol: "kr", name: "Norwegian Krone" },
     { id: "7", code: "DKK", symbol: "kr", name: "Danish Krone" },
+  ];
+
+  const languages = [
+    { id: "1", code: "en", icon: "/uploads/icons/en.png", name: "English" },
+    { id: "2", code: "fr", icon: "/uploads/icons/fr.png", name: "French" },
+    { id: "3", code: "de", icon: "/uploads/icons/de.svg", name: "German" },
+    { id: "4", code: "es", icon: "/uploads/icons/es.svg", name: "Spanish" },
+    { id: "5", code: "nl", icon: "/uploads/icons/nl.png", name: "Dutch" },
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,6 +59,11 @@ const Header = ({
       setSelectedCurrency(savedCurrency);
     }
 
+    const savedLanguage = localStorage.getItem("selectedLanguage");
+    if (savedLanguage) {
+      setSelectedLanguage(savedLanguage);
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -57,16 +71,26 @@ const Header = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle currency selection and save it to localStorage
   const handleCurrencySelect = (currencyCode: string) => {
     setSelectedCurrency(currencyCode);
-    localStorage.setItem("selectedCurrency", currencyCode); // Save to localStorage
+    localStorage.setItem("selectedCurrency", currencyCode);
     setShowCurrencySelector(false);
+  };
+
+  const handleLanguageSelect = (languageCode: string) => {
+    setSelectedLanguage(languageCode);
+    i18n.changeLanguage(languageCode);
+    localStorage.setItem("selectedLanguage", languageCode);
+    setShowLanguageSelector(false);
   };
 
   // Find the selected currency from the local list
   const selectedCurrencyData = currencies.find(
     (currency) => currency.code === selectedCurrency
+  );
+
+  const selectedLanguageData = languages.find(
+    (language) => language.code === selectedLanguage
   );
 
   return (
@@ -332,6 +356,54 @@ const Header = ({
               onOpenChange={setShowLanguageSelector}>
               <PopoverTrigger asChild>
                 <button className="flex items-center gap-2 px-4 py-2 rounded-r-full border border-gray-300 border-l-0 focus:outline-none">
+                  {selectedLanguageData ? (
+                    <>
+                      <span className="w-6 h-6 flex items-center justify-center">
+                        <img
+                          src={selectedLanguageData.icon}
+                          alt="language icon"
+                          className="w-full h-full object-contain"
+                        />
+                      </span>
+                      <span>{selectedLanguageData.name}</span>
+                    </>
+                  ) : (
+                    "Select Language"
+                  )}
+                </button>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-100 p-4" align="end">
+                <div className="bg-ltg-white relative grid p-2 pb-2">
+                  <h3 className="font-dosis border-b-ltg-grey-4 border-b pb-2 text-l font-medium">
+                    Select your preferred Language
+                  </h3>
+                  {languages.map((language) => (
+                    <button
+                      key={language.id}
+                      className="border-b-ltg-grey-4 hover:bg-ltg-grey-4 flex items-center gap-5 border-b px-2 py-4 transition duration-150 ease-in-out hover:bg-opacity-10 hover:text-opacity-100"
+                      onClick={() => handleLanguageSelect(language.code)}>
+                      <div className="w-6 h-6 flex items-center justify-center">
+                        <span className="w-6 h-6 flex items-center justify-center overflow-hidden rounded">
+                          <img
+                            src={language.icon}
+                            alt="language icon"
+                            className="w-full h-full object-cover"
+                          />
+                        </span>
+                      </div>
+                      <div>{language.name}</div>
+                    </button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+
+            {/* <Popover
+              open={showLanguageSelector}
+              onOpenChange={setShowLanguageSelector}>
+              <PopoverTrigger asChild>
+                <button className="flex items-center gap-2 px-4 py-2 rounded-r-full border border-gray-300 border-l-0 focus:outline-none">
                   <span className="flex items-center">
                     <svg
                       width="24"
@@ -572,7 +644,7 @@ const Header = ({
                   </button>
                 </div>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
           </div>
         </div>
       </div>
