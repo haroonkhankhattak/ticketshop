@@ -23,21 +23,51 @@ const Header = ({
   isScrolledPastHero: boolean;
   fixed: boolean;
 }) => {
+  const currencies = [
+    { id: "1", code: "GBP", symbol: "£", name: "British Pound" },
+    { id: "2", code: "EUR", symbol: "€", name: "Euro" },
+    { id: "3", code: "USD", symbol: "$", name: "US Dollar" },
+    { id: "4", code: "CHF", symbol: "Fr", name: "Swiss Franc" },
+    { id: "5", code: "SEK", symbol: "kr", name: "Swedish Krona" },
+    { id: "6", code: "NOK", symbol: "kr", name: "Norwegian Krone" },
+    { id: "7", code: "DKK", symbol: "kr", name: "Danish Krone" },
+  ];
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   const [showCurrencySelector, setShowCurrencySelector] = useState(false);
+  const [selectedCurrency, setSelectedCurrency] = useState<string | null>(null);
+
   const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
+    const savedCurrency = localStorage.getItem("selectedCurrency");
+    if (savedCurrency) {
+      setSelectedCurrency(savedCurrency);
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle currency selection and save it to localStorage
+  const handleCurrencySelect = (currencyCode: string) => {
+    setSelectedCurrency(currencyCode);
+    localStorage.setItem("selectedCurrency", currencyCode); // Save to localStorage
+    setShowCurrencySelector(false);
+  };
+
+  // Find the selected currency from the local list
+  const selectedCurrencyData = currencies.find(
+    (currency) => currency.code === selectedCurrency
+  );
 
   return (
     <header
@@ -84,6 +114,57 @@ const Header = ({
 
           <div className="flex items-center gap-1">
             <Popover
+              open={showCurrencySelector}
+              onOpenChange={setShowCurrencySelector}>
+              <PopoverTrigger asChild>
+                <button className="flex items-center px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none">
+                  {selectedCurrencyData ? (
+                    <>
+                      <span className="mr-2">
+                        {selectedCurrencyData.symbol}
+                      </span>
+                      <span>{selectedCurrencyData.code}</span>
+                    </>
+                  ) : (
+                    "Select Currency"
+                  )}
+                </button>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-100 p-4" align="end">
+                <div className="bg-ltg-white relative grid p-2 pb-2">
+                  <h3 className="font-dosis border-b-ltg-grey-4 border-b pb-2 text-l font-medium">
+                    Select your preferred currency
+                  </h3>
+                  {currencies.map((currency) => (
+                    <button
+                      key={currency.id}
+                      className="border-b-ltg-grey-4 hover:bg-ltg-grey-4 flex items-center gap-5 border-b px-2 py-4 transition duration-150 ease-in-out hover:bg-opacity-10 hover:text-opacity-100"
+                      onClick={() => handleCurrencySelect(currency.code)}>
+                      <div className="items-center justify-center">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 12 16"
+                          className="text-ltg-grey-2 h-5 w-8"
+                          aria-hidden="true">
+                          <text
+                            x="50%"
+                            y="50%"
+                            font-size="1rem"
+                            text-anchor="middle"
+                            dominant-baseline="central"
+                            fill="currentColor">
+                            {currency.symbol}
+                          </text>
+                        </svg>
+                      </div>
+                      <div>{currency.name}</div>
+                    </button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
+            {/* <Popover
               open={showCurrencySelector}
               onOpenChange={setShowCurrencySelector}>
               <PopoverTrigger asChild>
@@ -244,7 +325,7 @@ const Header = ({
                   </button>
                 </div>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
 
             <Popover
               open={showLanguageSelector}
