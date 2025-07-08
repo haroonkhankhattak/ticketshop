@@ -9,14 +9,90 @@ import {
     ShieldCheck,
     Armchair,
     Eye,
+    Section,
 } from "lucide-react";
 
-const OrderSummary = () => {
+import { CLUB_FANS } from "../../lib/constants";
+import { useCurrencyLanguage } from "../../lib/CurrencyLanguageContext";
+
+interface CheckoutLayoutProps {
+    eventName: string,
+    categoryName: string,
+    date: string,
+    time: string,
+    venue: string,
+    ticketprice: number,
+    quantity: number,
+    ticketArea: string,
+    ticketSection: string,
+    seatedTogather: boolean;
+}
+
+const OrderSummary: React.FC<CheckoutLayoutProps> = ({
+    eventName: eventName,
+    categoryName: categoryName,
+    date: date,
+    time: time,
+    venue: venue,
+    ticketprice: ticketprice,
+    quantity: quantity,
+    ticketArea: ticketArea,
+    ticketSection: ticketSection,
+    seatedTogather: seatedTogather
+}) => {
+
+    const { selectedCurrency } = useCurrencyLanguage();
+
+    const currencySymbols: Record<string, string> = {
+        gbp: "£",
+        usd: "$",
+        eur: "€",
+        chf: "Fr",
+        sek: "kr",
+        nok: "kr",
+        dkk: "kr",
+    };
+
+    const currencyKey = selectedCurrency.toLowerCase();
+    const symbol = currencySymbols[selectedCurrency] || "";
+
+    const exchangeRates: Record<string, number> = {
+        usd: 1.25,
+        eur: 1.15,
+        chf: 1.10,
+        sek: 13.00,
+        nok: 13.50,
+        dkk: 8.50,
+        gbp: 1,
+    };
+
+    const ticketPrice = Number((ticketprice * (exchangeRates[currencyKey] || 1)).toFixed(0));
+
+
+
+    console.log("--------------->", eventName, categoryName, date, time, venue, ticketArea, ticketSection, ticketprice, quantity, seatedTogather);
+
+    function getFirstTeam(eventName) {
+        const teams = eventName.split(' vs '); // Split the string by ' vs '
+        return teams[0]; // Return the first team
+    }
+
+    const homeTeam = getFirstTeam(eventName);
+    const filename = CLUB_FANS[homeTeam];
+    const markupPercentage = 0.3;
+    const markupAmount = ticketPrice * markupPercentage; // 30
+    const totalPrice = ticketPrice + markupAmount;       // 130
+
+    const totalMarkup = (markupAmount * quantity).toFixed(0);
+    const grandTotal = (totalPrice * quantity).toFixed(0);
+
+
+
     return (
         <Card className="border-none shadow-lg">
             <div className="relative h-40 w-full">
                 <img
-                    src="/uploads/teamfans/Liverpool.webp"
+                    src={`/uploads/teamfans/${filename}`}
                     alt="Liverpool vs Tottenham match"
                     className="object-cover w-full h-full rounded-t-lg"
                 />
@@ -27,11 +103,11 @@ const OrderSummary = () => {
                 <div>
                     <div className="flex items-center gap-2">
                         <span className="px-2 py-1 bg-sky-500/10 text-sky-500 text-xs font-medium rounded">
-                            ENGLISH PREMIER LEAGUE
+                            {categoryName}
                         </span>
                     </div>
                     <h2 className="text-xl font-semibold mt-2">
-                        Liverpool vs Arsenal
+                        {eventName}
                     </h2>
                 </div>
 
@@ -39,14 +115,14 @@ const OrderSummary = () => {
                     <div className="flex items-center gap-2 text-gray-500">
                         <CalendarDays className="h-4 w-4 text-gray-500" />
                         <span className="text-sm font-thin">
-                            Sunday, 11th May 2025 16:30
+                            {date}
                         </span>
                     </div>
 
                     <div className="flex items-center gap-2 text-gray-500">
                         <MapPin className="h-4 w-4 text-gray-500" />
                         <span className="text-sm font-thin">
-                            Anfield Road, Liverpool, United Kingdom
+                            {venue}
                         </span>
                     </div>
                 </div>
@@ -55,7 +131,7 @@ const OrderSummary = () => {
                     <div className="flex items-center gap-2 text-emerald-600">
                         <BadgeCheck className="h-4 w-4" />
                         <span className="text-sm font-medium">
-                            100% Money Back Guarantee
+                            150% Money Back Guarantee
                         </span>
                         <Info className="h-4 w-4 text-emerald-400 cursor-help" />
                     </div>
@@ -111,7 +187,7 @@ const OrderSummary = () => {
 
                         <div className="flex flex-col">
                             <span className="text-sm font-semibold">Area / Section</span>
-                            <span className="text-sm font-thin">KENNY DALGLISH STAND LOWER TIER KJ</span>
+                            <span className="text-sm font-thin">{ticketArea}, {ticketSection}</span>
                         </div>
                     </div>
 
@@ -120,9 +196,13 @@ const OrderSummary = () => {
 
                         <div className="flex flex-col">
                             <span className="text-sm font-semibold">Seats</span>
+
                             <span className="text-sm font-thin">
-                                Seats will NOT be next to each other.
+                                {seatedTogather
+                                    ? "Seats will be next to each other."
+                                    : "Seats will NOT be next to each other."}
                             </span>
+
                         </div>
                     </div>
                 </div>
@@ -132,24 +212,24 @@ const OrderSummary = () => {
                 <div className="space-y-1">
                     <div className="flex font-light justify-between text-gray-500">
                         <span>Price per ticket</span>
-                        <span className="font-semibold">£675.00</span>
+                        <span className="font-semibold">{symbol} {ticketPrice}</span>
                     </div>
 
                     <div className="flex font-light justify-between text-gray-500">
                         <span>Quantity</span>
-                        <span className="font-semibold">1x</span>
+                        <span className="font-semibold">{quantity}x</span>
                     </div>
 
                     <div className="flex font-light justify-between text-gray-500">
                         <span>Service Fee + Tax</span>
-                        <span className="font-semibold">£202.50</span>
+                        <span className="font-semibold">{symbol} {totalMarkup}</span>
                     </div>
 
                     <hr className="border-t-1 border-dashed border-gray-400" />
 
                     <div className="flex justify-between text-lg font-bold">
                         <span>Total</span>
-                        <span>£877.50</span>
+                        <span>{symbol} {grandTotal}</span>
                     </div>
                 </div>
 

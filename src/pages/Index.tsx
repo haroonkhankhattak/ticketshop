@@ -15,17 +15,11 @@ import { useTranslation } from "react-i18next";
 import { getHomePageProps } from "@/lib/graphql/queries/getHomePageProps";
 import { HomePageProps } from "@/lib/graphql/queries/getHomePageProps";
 
-console.log("💥 This file is being evaluated");
-
-
-
 
 export const getServerSideProps = getHomePageProps;
 
 
-
-// ✅ Page Component
-const Index = ({ featuredMatches }: HomePageProps) => {
+const Index = () => {
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const heroRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation();

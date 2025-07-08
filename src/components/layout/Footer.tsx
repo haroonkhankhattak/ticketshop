@@ -107,12 +107,12 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  to="/premier-league"
+                  to="/league/premier-league"
                   className="opacity-80 hover:opacity-100 hover:text-ticket-red transition-colors">
                   Premier League Tickets
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/la-liga"
                   className="opacity-80 hover:opacity-100 hover:text-ticket-red transition-colors">
@@ -139,7 +139,7 @@ const Footer = () => {
                   className="opacity-80 hover:opacity-100 hover:text-ticket-red transition-colors">
                   Bundesliga Tickets
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -158,7 +158,7 @@ const Footer = () => {
               <li className="flex items-start">
                 <Mail size={16} className="mr-3 mt-1 text-ticket-red" />
                 <span className="opacity-80">
-                  support@footballticketshub.com
+                  contact@footballticketshub.com
                 </span>
               </li>
             </ul>

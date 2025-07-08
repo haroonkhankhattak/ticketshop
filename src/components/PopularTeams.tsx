@@ -51,26 +51,26 @@ const PopularTeams = () => {
   const teams = [
     {
       name: "Arsenal",
-      imageUrl: "/uploads/teamfans/Arsenal.webp",
-      link: "/matches?team=Arsenal&league=Premier League",
+      imageUrl: "/uploads/teamfans/arsenal.avif",
+      link: "/matches/premier-league/arsenal",
       logoUrl: "/uploads/teamlogo/Arsenal.webp",
     },
     {
       name: "Chelsea",
-      imageUrl: "/uploads/teamfans/Chelsea.webp",
-      link: "/matches?team=Chelsea&league=Premier League",
+      imageUrl: "/uploads/teamfans/chelsea.webp",
+      link: "/matches/premier-league/chelsea",
       logoUrl: "/uploads/teamlogo/Chelsea.webp",
     },
     {
       name: "Liverpool",
-      imageUrl: "/uploads/teamfans/Liverpool.webp",
-      link: "/matches?team=Liverpool&league=Premier League",
+      imageUrl: "/uploads/teamfans/liverpool.webp",
+      link: "/matches/premier-league/liverpool",
       logoUrl: "/uploads/teamlogo/Liverpool.webp",
     },
     {
       name: "Manchester United",
-      imageUrl: "/uploads/teamfans/Manchester United.webp",
-      link: "/matches?team=Manchester United&league=Premier League",
+      imageUrl: "/uploads/teamfans/manchester-united.jpg",
+      link: "/matches/premier-league/manchester-united",
       logoUrl: "/uploads/teamlogo/manchester_united.webp",
     },
   ];

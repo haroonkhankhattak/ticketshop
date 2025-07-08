@@ -1,11 +1,22 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { GET_UPCOMING_POPULAR_MATCHES } from "../graphql/queries/PopularUpcomingMatches";
 
+// export const client = new ApolloClient({
+//   uri: "http://localhost:4000/graphql",
+//   cache: new InMemoryCache(),
+//   ssrMode: true,
+// });
+
 export const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://api.footballticketshub.com/graphql",
   cache: new InMemoryCache(),
   ssrMode: true,
 });
+
+// const client = new ApolloClient({
+//   uri: process.env.NEXT_PUBLIC_GRAPHQL_API || 'http://localhost:3000/',
+//   cache: new InMemoryCache(),
+// });
 
 // import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
